@@ -81,7 +81,11 @@ const ResetPassword = () => {
     <div className="bg-background mx-auto my-6 flex min-h-[60vh] w-[90vw] flex-col justify-center rounded-lg border p-8 px-5 shadow-lg min-[540px]:px-10 md:my-10 md:w-[70vw] lg:w-1/2 2xl:w-1/3">
       <Image
         className="mx-auto h-14 w-fit"
-        src={theme === 'dark' ? '/logo/logo-dark.png' : '/logo/logo-white.png'}
+        src={
+          theme === 'dark'
+            ? '/logo/dailyit-logo-white.png'
+            : '/logo/dailyit-logo-black.png'
+        }
         height={200}
         width={400}
         alt="gadget grid logo"

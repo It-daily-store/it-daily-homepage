@@ -240,8 +240,8 @@ const VerifyEmail = () => {
                 className="mx-auto h-14 w-fit"
                 src={
                   theme === 'dark'
-                    ? '/logo/logo-dark.png'
-                    : '/logo/logo-white.png'
+                    ? '/logo/dailyit-logo-white.png'
+                    : '/logo/dailyit-logo-black.png'
                 }
                 height={200}
                 width={400}

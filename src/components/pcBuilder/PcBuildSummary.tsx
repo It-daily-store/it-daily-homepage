@@ -129,7 +129,7 @@ const PcBuilderPdfSummary = ({ buildData }: { buildData: IPcBuild[] }) => {
       <Page style={styles.page}>
         <View style={styles.header}>
           <View style={styles.logoContainer}>
-            <Image style={styles.logo} src="/logo/logo-white.png" />
+            <Image style={styles.logo} src="/logo/dailyit-logo-black.png" />
           </View>
           <View style={styles.companyInfo}>
             <Text style={styles.companyText}>Gadget Grid Inc.</Text>

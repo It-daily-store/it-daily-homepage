@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       'Explore a wide range of IT products at Gadget Grid. From computers to gaming gear, find the latest tech with fast delivery and great deals.',
     images: [
       {
-        url: `${websiteUrl}/logo/logo-white.png`,
+        url: `${websiteUrl}/logo/dailyit-logo-black.png`,
         alt: 'Gadget Grid IT Products',
       },
     ],
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
       'Shop the latest IT products at Gadget Grid. Discover top tech, from smartphones to accessories, with fast shipping and great prices.',
     images: [
       {
-        url: `${websiteUrl}/logo/logo-white.png`,
+        url: `${websiteUrl}/logo/dailyit-logo-black.png`,
         alt: 'Gadget Grid Tech Store',
       },
     ],

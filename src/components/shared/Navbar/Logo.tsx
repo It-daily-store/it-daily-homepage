@@ -9,7 +9,11 @@ const Logo = () => {
   return (
     <Link href={'/'}>
       <Image
-        src={theme !== 'dark' ? '/logo/logo-white.png' : '/logo/logo-dark.png'}
+        src={
+          theme !== 'dark'
+            ? '/logo/dailyit-logo-black.png'
+            : '/logo/dailyit-logo-white.png'
+        }
         width={320}
         height={170}
         className={'h-12 w-fit'}
