@@ -28,6 +28,6 @@ COPY --from=builder /app/.env.prod ./
 # only if you have next.config.js
 COPY --from=builder /app/next.config.ts ./next.config.ts
 
-EXPOSE 4000
+EXPOSE 6000
 
 CMD ["npm", "start"]

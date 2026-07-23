@@ -3,10 +3,10 @@ services:
     image: itdaily-frontend:latest
     container_name: itdaily-frontend
     ports:
-      - '127.0.0.1:4000:4000'
+      - '127.0.0.1:6001:6001'
     restart: always
     env_file: .env.prod
     environment:
       - NODE_ENV=production
-      - PORT=4000
+      - PORT=6001
     command: npm run start:prod # override for hot-reload
