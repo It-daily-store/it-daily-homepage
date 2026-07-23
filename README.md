@@ -117,7 +117,7 @@ Gadget Grid is a comprehensive e-commerce solution designed for selling IT produ
 ## 📁 Project Structure
 
 ```
-gadget-grid-homepage/
+itdaily-homepage/
 ├── public/                          # Static assets
 │   ├── logo/                       # Brand logos (light/dark)
 │   ├── payment-logos/              # Payment method logos
@@ -182,7 +182,7 @@ gadget-grid-homepage/
 
    ```bash
    git clone <repository-url>
-   cd gadget-grid-homepage
+   cd itdaily-homepage
    ```
 
 2. **Install dependencies**

@@ -134,7 +134,7 @@ export async function generateMetadata({
   }
 
   const websiteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://gadgetgrid.com';
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://itdaily.com';
   const productUrl = `${websiteUrl}/product/${product.slug}`;
   const rating = calculateRating(product?.reviews);
   const priceText = product.price === 0 ? 'Free' : `$${product.price}`;

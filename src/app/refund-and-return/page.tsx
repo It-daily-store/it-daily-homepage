@@ -229,7 +229,7 @@ export default function RefundReturnPolicy() {
               </h3>
               <div className="text-primary flex items-center justify-center gap-2 text-sm md:text-base">
                 <Mail className="h-4 w-4" />
-                <span>returns@gadgetgrid.com</span>
+                <span>returns@itdaily.com</span>
               </div>
             </div>
 

@@ -141,7 +141,7 @@ export function Footer() {
                   className="flex items-center gap-2 text-sm text-gray-300 transition-colors hover:text-white"
                 >
                   <span className="text-yellow-400">📧</span>{' '}
-                  info@gadgetgrid.com
+                  info@itdaily.com
                 </Link>
               </li>
               <li>

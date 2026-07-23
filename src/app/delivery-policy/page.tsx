@@ -246,7 +246,7 @@ export default function DeliveryPolicy() {
               </h3>
               <div className="text-primary flex items-center justify-center gap-2 text-sm md:text-base">
                 <Mail className="h-4 w-4" />
-                <span>delivery@gadgetgrid.com</span>
+                <span>delivery@itdaily.com</span>
               </div>
             </div>
 

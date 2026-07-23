@@ -153,7 +153,7 @@ export default function PrivacyPolicy() {
               <h3 className="mb-2 font-semibold text-black">By Email</h3>
               <div className="flex items-center justify-center gap-2 text-blue-600">
                 <Mail className="h-4 w-4" />
-                <span>info@gadgetgrid.com</span>
+                <span>info@itdaily.com</span>
               </div>
             </div>
 
