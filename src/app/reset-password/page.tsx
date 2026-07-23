@@ -88,7 +88,7 @@ const ResetPassword = () => {
         }
         height={200}
         width={400}
-        alt="gadget grid logo"
+        alt="Daily It logo"
       />
       <h2 className="text-primary pt-2 pb-4 text-center text-2xl font-bold">
         Reset Password!

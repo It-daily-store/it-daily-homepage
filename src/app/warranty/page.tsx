@@ -10,7 +10,7 @@ export default function WarrantyPolicy() {
             Warranty Policy
           </h1>
           <p className="mx-auto max-w-2xl text-base text-white md:text-lg">
-            Comprehensive warranty coverage and support for all your Gadget Grid
+            Comprehensive warranty coverage and support for all your Daily It
             purchases
           </p>
         </div>
@@ -24,7 +24,7 @@ export default function WarrantyPolicy() {
             Warranty Coverage
           </h2>
           <p className="text-dark-gray text-sm leading-relaxed md:text-base">
-            All products sold by Gadget Grid come with manufacturer warranty
+            All products sold by Daily It come with manufacturer warranty
             coverage. Warranty periods vary by product category and brand,
             ranging from 6 months to 3 years. The warranty covers manufacturing
             defects, hardware failures, and component malfunctions under normal
@@ -32,8 +32,8 @@ export default function WarrantyPolicy() {
           </p>
           <p className="text-dark-gray mt-4 text-sm leading-relaxed md:text-base">
             Warranty coverage begins from the date of purchase and is valid only
-            for products purchased directly from Gadget Grid or authorized
-            dealers. Proof of purchase is required for all warranty claims.
+            for products purchased directly from Daily It or authorized dealers.
+            Proof of purchase is required for all warranty claims.
           </p>
         </section>
 

@@ -23,7 +23,7 @@ export default function DeliveryPolicy() {
             Delivery Coverage
           </h2>
           <p className="text-dark-gray text-sm leading-relaxed md:text-base">
-            Gadget Grid delivers nationwide across Bangladesh. We offer delivery
+            Daily It delivers nationwide across Bangladesh. We offer delivery
             services to all major cities including Dhaka, Chittagong, Sylhet,
             Rajshahi, Khulna, Barisal, Rangpur, and Mymensingh. For remote
             areas, additional delivery charges may apply and delivery times may

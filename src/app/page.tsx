@@ -7,15 +7,15 @@ import React from 'react';
 const websiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Gadget Grid - Your One-Stop Shop for IT Products & Gadgets',
+  title: 'Daily It - Your One-Stop Shop for IT Products & Gadgets',
   description:
-    'Discover the latest IT products at Gadget Grid. Shop cutting-edge gadgets, electronics, and tech accessories with fast shipping and unbeatable prices.',
+    'Discover the latest IT products at Daily It. Shop cutting-edge gadgets, electronics, and tech accessories with fast shipping and unbeatable prices.',
   keywords: [
     'IT products',
     'gadgets',
     'electronics',
     'tech accessories',
-    'Gadget Grid',
+    'Daily It',
     'buy tech online',
     'computers',
     'smartphones',
@@ -26,27 +26,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: websiteUrl,
-    title: 'Gadget Grid - Your One-Stop Shop for IT Products & Gadgets',
+    title: 'Daily It - Your One-Stop Shop for IT Products & Gadgets',
     description:
-      'Explore a wide range of IT products at Gadget Grid. From computers to gaming gear, find the latest tech with fast delivery and great deals.',
+      'Explore a wide range of IT products at Daily It. From computers to gaming gear, find the latest tech with fast delivery and great deals.',
     images: [
       {
         url: `${websiteUrl}/logo/dailyit-logo-black.png`,
-        alt: 'Gadget Grid IT Products',
+        alt: 'Daily It IT Products',
       },
     ],
-    siteName: 'Gadget Grid',
+    siteName: 'Daily It',
   },
   twitter: {
     card: 'summary_large_image',
     site: '@GadgetGrid', // Replace with your Twitter handle
-    title: 'Gadget Grid - Your One-Stop Shop for IT Products & Gadgets',
+    title: 'Daily It - Your One-Stop Shop for IT Products & Gadgets',
     description:
-      'Shop the latest IT products at Gadget Grid. Discover top tech, from smartphones to accessories, with fast shipping and great prices.',
+      'Shop the latest IT products at Daily It. Discover top tech, from smartphones to accessories, with fast shipping and great prices.',
     images: [
       {
         url: `${websiteUrl}/logo/dailyit-logo-black.png`,
-        alt: 'Gadget Grid Tech Store',
+        alt: 'Daily It Tech Store',
       },
     ],
   },
@@ -68,10 +68,10 @@ const HomePage = () => {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            name: 'Gadget Grid',
+            name: 'Daily It',
             url: websiteUrl,
             description:
-              'Gadget Grid is your one-stop shop for IT products, offering the latest gadgets, electronics, and tech accessories with fast shipping.',
+              'Daily It is your one-stop shop for IT products, offering the latest gadgets, electronics, and tech accessories with fast shipping.',
             potentialAction: {
               '@type': 'SearchAction',
               target: {

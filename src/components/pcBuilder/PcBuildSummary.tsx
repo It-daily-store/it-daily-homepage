@@ -132,14 +132,14 @@ const PcBuilderPdfSummary = ({ buildData }: { buildData: IPcBuild[] }) => {
             <Image style={styles.logo} src="/logo/dailyit-logo-black.png" />
           </View>
           <View style={styles.companyInfo}>
-            <Text style={styles.companyText}>Gadget Grid Inc.</Text>
+            <Text style={styles.companyText}>Daily It Inc.</Text>
             <Text style={[styles.companyText, { paddingVertical: 3 }]}>
               123 Tech Street, Innovation City, TX 12345
             </Text>
             <Text style={styles.companyText}>Phone: (123) 456-7890</Text>
           </View>
         </View>
-        {/* <Text style={styles.title}>Gadget Grid PC Builder: Build Your PC</Text> */}
+        {/* <Text style={styles.title}>Daily It PC Builder: Build Your PC</Text> */}
         <View style={styles.table}>
           <View style={styles.tableHeader}>
             <View style={[styles.tableCellHeader, { width: '30%' }]}>

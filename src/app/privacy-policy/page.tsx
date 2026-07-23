@@ -24,7 +24,7 @@ export default function PrivacyPolicy() {
             Information Collection and Use
           </h2>
           <p className="text-dark-gray leading-relaxed">
-            Gadget Grid is committed to protecting your privacy. We collect
+            Daily It is committed to protecting your privacy. We collect
             information to provide better services to our customers. The
             information we collect includes your name, email address, phone
             number, shipping address, and payment details when you make a
@@ -45,7 +45,7 @@ export default function PrivacyPolicy() {
             Account Registration
           </h2>
           <p className="text-dark-gray leading-relaxed">
-            When you create an account with Gadget Grid, you provide us with
+            When you create an account with Daily It, you provide us with
             personal information including your name, email address, and contact
             details. This information is used to manage your account, process
             orders, and provide personalized customer service. You can update
@@ -88,7 +88,7 @@ export default function PrivacyPolicy() {
             Data Security
           </h2>
           <p className="text-dark-gray leading-relaxed">
-            Gadget Grid implements robust security measures to protect your
+            Daily It implements robust security measures to protect your
             personal information. We use SSL encryption for data transmission,
             secure servers for data storage, and regular security audits to
             ensure your information remains safe. Our team is trained in data
@@ -104,9 +104,9 @@ export default function PrivacyPolicy() {
           </h2>
           <p className="text-dark-gray leading-relaxed">
             Our website may contain links to third-party websites. Please note
-            that Gadget Grid is not responsible for the privacy practices of
-            these external sites. We encourage you to read the privacy policies
-            of any website you visit through our links.
+            that Daily It is not responsible for the privacy practices of these
+            external sites. We encourage you to read the privacy policies of any
+            website you visit through our links.
           </p>
         </section>
 

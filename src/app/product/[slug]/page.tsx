@@ -56,19 +56,19 @@ const websiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 //   if (!product) {
 //     return {
 //       title: 'Product Not Found',
-//       description: 'The requested product could not be found on Gadget Grid.',
+//       description: 'The requested product could not be found on Daily It.',
 //     };
 //   }
 
 //   return {
 //     title: `${product?.meta?.title || product?.name}`,
-//     description: `${product?.meta?.description || product.description.substring(0, 157)}... Shop now at Gadget Grid for the best deals on IT products.`,
+//     description: `${product?.meta?.description || product.description.substring(0, 157)}... Shop now at Daily It for the best deals on IT products.`,
 //     keywords: [
 //       product.name,
 //       'IT products',
 //       'gadgets',
 //       'electronics',
-//       'Gadget Grid',
+//       'Daily It',
 //       'buy tech online',
 //     ],
 //     robots: 'index, follow',
@@ -76,25 +76,25 @@ const websiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 //     openGraph: {
 //       type: 'website',
 //       url: `${websiteUrl}/product/${product.slug}`,
-//       title: `${product?.meta?.title || product.name} - Gadget Grid`,
-//       description: `${product?.meta?.description || product.description.substring(0, 197)}... Discover this and more at Gadget Grid.`,
+//       title: `${product?.meta?.title || product.name} - Daily It`,
+//       description: `${product?.meta?.description || product.description.substring(0, 197)}... Discover this and more at Daily It.`,
 //       images: [
 //         {
 //           url: product?.meta?.image || product?.thumbnail,
-//           alt: `${product?.meta?.title || product.name} - Gadget Grid`,
+//           alt: `${product?.meta?.title || product.name} - Daily It`,
 //         },
 //       ],
-//       siteName: 'Gadget Grid',
+//       siteName: 'Daily It',
 //     },
 //     twitter: {
 //       card: 'summary_large_image',
 //       site: '@GadgetGrid', // Replace with your Twitter handle
-//       title: `${product?.meta?.title || product.name} - Gadget Grid`,
-//       description: `${product?.meta?.description || product.description.substring(0, 197)}... Shop now at Gadget Grid.`,
+//       title: `${product?.meta?.title || product.name} - Daily It`,
+//       description: `${product?.meta?.description || product.description.substring(0, 197)}... Shop now at Daily It.`,
 //       images: [
 //         {
 //           url: product?.meta?.image || product?.thumbnail,
-//           alt: `${product?.meta?.title || product.name} - Gadget Grid`,
+//           alt: `${product?.meta?.title || product.name} - Daily It`,
 //         },
 //       ],
 //     },
@@ -124,8 +124,8 @@ export async function generateMetadata({
 
   if (!product || !product.name) {
     return {
-      title: 'Product Not Found | Gadget Grid',
-      description: 'The requested product could not be found on Gadget Grid.',
+      title: 'Product Not Found | Daily It',
+      description: 'The requested product could not be found on Daily It.',
       robots: {
         index: false,
         follow: false,
@@ -133,8 +133,7 @@ export async function generateMetadata({
     };
   }
 
-  const websiteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://itdaily.com';
+  const websiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://itdaily.com';
   const productUrl = `${websiteUrl}/product/${product.slug}`;
   const rating = calculateRating(product?.reviews);
   const priceText = product.price === 0 ? 'Free' : `$${product.price}`;
@@ -147,12 +146,12 @@ export async function generateMetadata({
       : '';
 
   // Enhanced title and description
-  const title = `${product?.meta?.title || product.name} | Gadget Grid`;
+  const title = `${product?.meta?.title || product.name} | Daily It`;
   const description =
     product?.meta?.description ||
     (product.description
-      ? `${product.description.substring(0, 160)}... Shop now at Gadget Grid.`
-      : `Explore ${product.name} at Gadget Grid. High-quality IT product with ${product.quantity !== 0 ? 'in-stock' : 'out-of-stock'} status.`);
+      ? `${product.description.substring(0, 160)}... Shop now at Daily It.`
+      : `Explore ${product.name} at Daily It. High-quality IT product with ${product.quantity !== 0 ? 'in-stock' : 'out-of-stock'} status.`);
 
   // Enhanced keywords
   const keywords = [
@@ -161,7 +160,7 @@ export async function generateMetadata({
     breadcrumCats?.map((cat) => cat.name).join(', ') || 'IT products',
     'gadgets',
     'electronics',
-    'Gadget Grid',
+    'Daily It',
     product.quantity !== 0 ? 'in stock' : 'out of stock',
     product.discount ? 'discounted product' : 'full price',
     'buy tech online',
@@ -199,7 +198,7 @@ export async function generateMetadata({
             `${websiteUrl}/default-product-image.jpg`,
           width: 1200,
           height: 630,
-          alt: `${product?.meta?.title || product.name} - Gadget Grid`,
+          alt: `${product?.meta?.title || product.name} - Daily It`,
           type: 'image/jpeg',
         },
         {
@@ -209,11 +208,11 @@ export async function generateMetadata({
             `${websiteUrl}/default-product-image.jpg`,
           width: 800,
           height: 600,
-          alt: `${product?.meta?.title || product.name} - Gadget Grid`,
+          alt: `${product?.meta?.title || product.name} - Daily It`,
           type: 'image/jpeg',
         },
       ],
-      siteName: 'Gadget Grid',
+      siteName: 'Daily It',
       locale: 'en_US',
     },
     twitter: {
@@ -314,7 +313,7 @@ const ProductPage = async ({
     sku: product?.sku,
     brand: {
       '@type': 'Brand',
-      name: 'Gadget Grid',
+      name: 'Daily It',
     },
     offers: {
       '@type': 'Offer',
@@ -332,7 +331,7 @@ const ProductPage = async ({
           : 'https://schema.org/OutOfStock',
       seller: {
         '@type': 'Organization',
-        name: 'Gadget Grid',
+        name: 'Daily It',
       },
     },
     // aggregateRating:

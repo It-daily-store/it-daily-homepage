@@ -23,7 +23,7 @@ export default function TermsAndConditions() {
             Acceptance of Terms
           </h2>
           <p className="text-dark-gray text-sm leading-relaxed md:text-base">
-            By accessing and using Gadget Grid&apos;s website and services, you
+            By accessing and using Daily It&apos;s website and services, you
             accept and agree to be bound by these Terms and Conditions. If you
             do not agree to these terms, please do not use our website or
             services. These terms apply to all visitors, users, and customers
@@ -84,7 +84,7 @@ export default function TermsAndConditions() {
             Shipping & Delivery
           </h2>
           <p className="text-dark-gray text-sm leading-relaxed md:text-base">
-            Delivery times are estimates and not guaranteed. Gadget Grid is not
+            Delivery times are estimates and not guaranteed. Daily It is not
             responsible for delays caused by shipping carriers, customs, or
             other factors beyond our control. Risk of loss and title for
             products pass to you upon delivery to the shipping carrier. You are
@@ -113,7 +113,7 @@ export default function TermsAndConditions() {
             Warranties & Disclaimers
           </h2>
           <p className="text-dark-gray text-sm leading-relaxed md:text-base">
-            Products sold by Gadget Grid come with manufacturer warranties where
+            Products sold by Daily It come with manufacturer warranties where
             applicable. We provide products &quot;as is&quot; without additional
             warranties beyond those provided by manufacturers. We disclaim all
             implied warranties including merchantability and fitness for a
@@ -127,7 +127,7 @@ export default function TermsAndConditions() {
             Limitation of Liability
           </h2>
           <p className="text-dark-gray text-sm leading-relaxed md:text-base">
-            Gadget Grid&apos;s liability is limited to the purchase price of the
+            Daily It&apos;s liability is limited to the purchase price of the
             product. We shall not be liable for any indirect, incidental,
             special, or consequential damages arising from the use of our
             products or services. This limitation applies regardless of the
@@ -142,7 +142,7 @@ export default function TermsAndConditions() {
           </h2>
           <p className="text-dark-gray text-sm leading-relaxed md:text-base">
             All content on this website, including text, graphics, logos,
-            images, and software, is the property of Gadget Grid or its content
+            images, and software, is the property of Daily It or its content
             suppliers and is protected by copyright and other intellectual
             property laws. You may not reproduce, distribute, or create
             derivative works from our content without written permission.

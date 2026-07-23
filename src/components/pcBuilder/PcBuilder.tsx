@@ -117,7 +117,7 @@ const PcBuilder = ({ settings }: TProps) => {
         <CardContent className="border-t pt-4 sm:px-8">
           <div className="mb-2 flex items-center justify-between">
             <h1 className="text-base font-semibold md:text-lg">
-              Gadget Grid PC Builder: Build Your PC
+              Daily It PC Builder: Build Your PC
             </h1>
             <div className="bg-pure-black/95 flex h-16 flex-col items-center justify-center gap-1 rounded-md px-3 md:min-w-28">
               <p className="font-semibold text-white">

@@ -21,26 +21,26 @@ const websiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
 export const metadata: Metadata = {
   title: {
-    default: 'Gadget Grid - Your One-Stop Shop for IT Products & Gadgets',
-    template: '%s - Gadget Grid',
+    default: 'Daily It - Your One-Stop Shop for IT Products & Gadgets',
+    template: '%s - Daily It',
   },
   description:
-    'Discover the latest IT products at Gadget Grid. Shop cutting-edge gadgets, electronics, and tech accessories with fast shipping and unbeatable prices.',
+    'Discover the latest IT products at Daily It. Shop cutting-edge gadgets, electronics, and tech accessories with fast shipping and unbeatable prices.',
   robots: 'index, follow',
   viewport: 'width=device-width, initial-scale=1.0',
   openGraph: {
     type: 'website',
     url: websiteUrl,
-    title: 'Gadget Grid - Your One-Stop Shop for IT Products & Gadgets',
+    title: 'Daily It - Your One-Stop Shop for IT Products & Gadgets',
     description:
-      'Explore a wide range of IT products at Gadget Grid. From computers to gaming gear, find the latest tech with fast delivery and great deals.',
+      'Explore a wide range of IT products at Daily It. From computers to gaming gear, find the latest tech with fast delivery and great deals.',
     images: [
       {
         url: `${websiteUrl}/logo/dailyit-logo-black.png`,
-        alt: 'Gadget Grid IT Products',
+        alt: 'Daily It IT Products',
       },
     ],
-    siteName: 'Gadget Grid',
+    siteName: 'Daily It',
   },
 };
 

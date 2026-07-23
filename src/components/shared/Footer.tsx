@@ -23,7 +23,7 @@ export function Footer() {
                 </Link>
               </li>
               <li className="text-sm text-gray-400">
-                Gadget Grid is your trusted destination for premium IT products,
+                Daily It is your trusted destination for premium IT products,
                 gadgets, and accessories. From laptops to smart devices, we
                 bring the latest technology at unbeatable prices.
               </li>
@@ -140,8 +140,7 @@ export function Footer() {
                   href="mailto:info@techlandbd.com"
                   className="flex items-center gap-2 text-sm text-gray-300 transition-colors hover:text-white"
                 >
-                  <span className="text-yellow-400">📧</span>{' '}
-                  info@itdaily.com
+                  <span className="text-yellow-400">📧</span> info@itdaily.com
                 </Link>
               </li>
               <li>
@@ -229,7 +228,7 @@ export function Footer() {
           <div className="flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
             {/* Copyright */}
             <p className="text-xs text-gray-500">
-              Copyright © 2025, Gadget Grid. All Rights Reserved.
+              Copyright © 2025, Daily It. All Rights Reserved.
             </p>
             {/* Payment Methods */}
             <div className="flex gap-2">
