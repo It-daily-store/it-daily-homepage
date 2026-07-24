@@ -1,14 +1,12 @@
 <div align="center">
-  <img src="public/logo/logo-dark.png" alt="Gadget Grid Logo" width="200" height="auto">
+  <img src="public/logo/dailyit-logo-white.png" alt="Gadget Grid Logo" width="200" height="auto">
   <h1>Gadget Grid It Shop</h1>
   <p>A modern, full-featured e-commerce platform specializing in IT products, gadgets, and electronics. Built with Next.js 15, TypeScript, and Tailwind CSS, offering a seamless shopping experience with advanced features like PC building, product comparison, and comprehensive order management.</p>
 </div>
 
-
 ## 🚀 Project Overview
 
 Gadget Grid is a comprehensive e-commerce solution designed for selling IT products and electronics. The platform provides users with an intuitive interface to browse, compare, and purchase technology products, with special features like a PC builder tool and advanced product filtering.
-
 
 ## ✨ Key Features
 

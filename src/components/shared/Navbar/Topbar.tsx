@@ -18,7 +18,7 @@ const Topbar = () => {
         <MobileCategoryMenu />
         <Link href={'/'} className="flex justify-center">
           <Image
-            src={'/logo/logo-dark.png'}
+            src={'/logo/dailyit-logo-white.png'}
             width={320}
             height={170}
             className={'h-11 w-fit sm:h-12'}

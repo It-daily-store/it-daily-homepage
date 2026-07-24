@@ -14,7 +14,7 @@ export function Footer() {
               <li>
                 <Link href={'/'}>
                   <Image
-                    src={'/logo/logo-dark.png'}
+                    src={'/logo/dailyit-logo-white.png'}
                     height={200}
                     width={400}
                     className="h-14 w-fit"
