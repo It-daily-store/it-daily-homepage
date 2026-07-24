@@ -12,7 +12,7 @@ import { Home } from 'lucide-react';
 const fetchData = async (slug: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/category/${slug}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/category/single/${slug}`,
       {
         cache: 'force-cache',
         next: { revalidate: 180 },

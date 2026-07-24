@@ -8,9 +8,12 @@ const getData = async () => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/category/get-featured`,
-      { next: { revalidate: 600 } },
+      { next: { revalidate: 120 } },
     );
     const data = await res.json();
+
+    console.log('Featured Categories Data:', data);
+
     return data;
   } catch (err) {
     console.log(err);
