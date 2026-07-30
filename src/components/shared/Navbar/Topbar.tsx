@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Computer, Search, User } from 'lucide-react';
+import { Computer, Search } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import MobileCategoryMenu from './MobileCategoryMenu';

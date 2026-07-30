@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton';
 import React from 'react';
 
-const ProductSkeleton = ({ className }: { className?: string }) => {
+const ProductSkeleton = ({ className: _className }: { className?: string }) => {
   return (
     <div className="bg-background flex flex-col gap-2 rounded-lg border p-3">
       <Skeleton className="aspect-[1.4/1]" />

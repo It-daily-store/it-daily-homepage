@@ -1,4 +1,3 @@
-import { TProduct } from '@/types/product.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'sonner';
 

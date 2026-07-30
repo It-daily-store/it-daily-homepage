@@ -13,8 +13,8 @@ import {
 import { loginAction, sendResetPasswordRequest } from '@/actions/auth';
 import { globalError } from '@/lib/utils';
 import { toast } from 'sonner';
-import z, { email } from 'zod';
-import { Mail, Lock, Eye, EyeOff, Zap } from 'lucide-react';
+import z from 'zod';
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import Link from 'next/link';
@@ -75,8 +75,6 @@ const LoginForm = ({ verify }: { verify?: () => void }) => {
   };
 
   const resetFormSubmit = async (values: z.infer<typeof resetFormSchema>) => {
-    const lastResetTime = localStorage.getItem('last_reset_time');
-
     try {
       setSendingReset(true);
       const res = await sendResetPasswordRequest(values.email);

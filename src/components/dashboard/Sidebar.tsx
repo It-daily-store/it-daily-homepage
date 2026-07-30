@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import LogoutButton from '../common/LogoutButton';
-import { useParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 const links = [

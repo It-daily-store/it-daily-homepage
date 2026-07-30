@@ -1,6 +1,5 @@
 'use client';
 import GlobalHeader from '@/components/global/GlobalHeader';
-import { instance } from '@/lib/axios';
 import { TNotification } from '@/types/notification';
 import React, { useEffect, useState } from 'react';
 import NotificationCard from './notificationCard';

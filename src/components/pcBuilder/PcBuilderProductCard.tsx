@@ -10,7 +10,6 @@ import {
   calculateDiscountPrice,
   calculateRating,
 } from '../shared/Product/ProductCard';
-import { Button } from '../ui/button';
 import PcBuilderAction from './PcBuilderAction';
 import { PcBuildSettings } from '@/types/pcbuilder';
 

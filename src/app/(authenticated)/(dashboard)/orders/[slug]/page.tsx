@@ -214,7 +214,6 @@ const OrderDetails = async ({
 
                 <div className="space-y-3">
                   {order.statusHistory.map((status, index) => {
-                    const isLast = index === order.statusHistory.length - 1;
                     const isCompleted = true; // All items in history are completed
 
                     return (

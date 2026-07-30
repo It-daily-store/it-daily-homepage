@@ -41,7 +41,7 @@ const VerifyEmail = () => {
   const searchParams = useSearchParams();
   const [isSending, setSending] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const [tab, setTab] = useState<'otp' | 'verify'>('verify');
   const [otp, setOtp] = useState('');

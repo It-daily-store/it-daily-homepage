@@ -17,7 +17,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TCategory } from '@/types/category.interface';
 import { TProduct } from '@/types/product.interface';
 import { isValidUrl } from '@/utils/common';
-import { Check, Star, Truck, X } from 'lucide-react';
+import { Check, Star, Truck } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -36,7 +36,7 @@ const fetchData = async (slug: string) => {
     );
     const data = await res.json();
     return data;
-  } catch (err) {
+  } catch {
     return undefined;
   }
 };

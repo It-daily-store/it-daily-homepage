@@ -2,9 +2,8 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { addToCart } from '@/redux/reducers/cartReducer';
 import { addToCompare } from '@/redux/reducers/compareReducer';
-import { CartProduct, TProduct } from '@/types/product.interface';
+import { TProduct } from '@/types/product.interface';
 import { ArrowLeftRight, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';

@@ -5,7 +5,6 @@ import { TProduct } from '@/types/product.interface';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { Input } from '../ui/input';
 import { fetchSearchProducts } from '@/actions/product';
-import { Loader } from 'lucide-react';
 import { TBrand } from '@/types/brand.interface';
 import { TCategory } from '@/types/category.interface';
 import { cn } from '@/lib/utils';

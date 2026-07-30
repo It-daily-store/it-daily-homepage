@@ -13,7 +13,7 @@ import { registerAction } from '@/actions/auth';
 import { globalError } from '@/lib/utils';
 import { toast } from 'sonner';
 import z from 'zod';
-import { Mail, Lock, Eye, EyeOff, Zap, User, Phone } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, User, Phone } from 'lucide-react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import Link from 'next/link';
@@ -35,7 +35,7 @@ const registerSchema = z.object({
 
 export type RegisterFormValues = z.infer<typeof registerSchema>;
 
-const RegisterForm = ({ verify }: { verify?: () => void }) => {
+const RegisterForm = ({ verify: _verify }: { verify?: () => void }) => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const form = useForm<RegisterFormValues>({

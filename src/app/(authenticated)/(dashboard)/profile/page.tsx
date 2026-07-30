@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
   User,
-  Mail,
   Phone,
   MapPin,
   Edit2,
@@ -68,7 +67,7 @@ export default function ProfilePage() {
   };
 
   const [data, setData] = useState<TUser | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
   const getData = async () => {
     setLoading(true);

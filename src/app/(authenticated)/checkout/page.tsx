@@ -22,9 +22,6 @@ import {
   Minus,
   Banknote,
   HandCoins,
-  Headphones,
-  Monitor,
-  Smartphone,
   ShoppingCart,
   Laptop,
   House,
@@ -583,7 +580,7 @@ export default function Component() {
                   <FormField
                     control={form.control}
                     name="shippingMethod"
-                    render={({ field }) => (
+                    render={({ field: _field }) => (
                       <FormItem>
                         <RadioGroup
                           value={deliveryMethod}

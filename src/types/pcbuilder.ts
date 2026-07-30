@@ -1,4 +1,4 @@
-import { CartProduct, TProduct } from './product.interface';
+import { TProduct } from './product.interface';
 
 export interface PcPart {
   id: number;

@@ -5,8 +5,6 @@ import { FilterSkeleton } from '@/components/category/FilterSkeleton';
 import CategoryProducts from '@/components/category/CategoryProducts';
 import ProductSkeleton from '@/components/shared/Product/ProductSkeleton';
 import CategoryPageTopSection from '@/components/category/CategoryPageTopSection';
-import { Skeleton } from '@/components/ui/skeleton';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CategoryPageTopSkeleton from '@/components/category/CategoryPageTopSkeleton';
 
 const ProductByCategoryPage = async ({

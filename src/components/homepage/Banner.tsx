@@ -6,8 +6,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from '@/components/ui/carousel';
 import Head from 'next/head';
 
@@ -38,7 +36,7 @@ const getBannerData = async () => {
     );
     const data = await res.json();
     return data;
-  } catch (err) {
+  } catch {
     return undefined;
   }
 };

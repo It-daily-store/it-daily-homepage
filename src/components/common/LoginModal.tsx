@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch } from '@/redux/hooks';
 import { setLoginModal } from '@/redux/reducers/loginModalReducer';
 import { useSearchParams } from 'next/navigation';
 import LoginForm from './LoginForm';
@@ -25,7 +25,6 @@ export const AuthForm = ({ verify }: { verify?: () => void }) => {
 };
 
 export default function LoginModal() {
-  const { isOpen } = useAppSelector((s) => s.LoginModal);
   const dispatch = useAppDispatch();
 
   const verify = async () => {

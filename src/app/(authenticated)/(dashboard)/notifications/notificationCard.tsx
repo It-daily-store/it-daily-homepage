@@ -2,14 +2,7 @@
 import { Card } from '@/components/ui/card';
 import { TNotification } from '@/types/notification';
 import dayjs from 'dayjs';
-import {
-  AlertCircle,
-  Archive,
-  CheckCircle,
-  Info,
-  Package,
-  Trash2,
-} from 'lucide-react';
+import { AlertCircle, CheckCircle, Info, Package } from 'lucide-react';
 import { useRouter } from 'nextjs-toploader/app';
 import React from 'react';
 

@@ -3,7 +3,6 @@ import { verifyMe } from '@/actions/auth';
 import { AuthForm } from '@/components/common/AuthForm';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { removeUser, setUser } from '@/redux/reducers/authReducer';
-import coookie from 'js-cookie';
 import { Loader } from 'lucide-react';
 import { useEffect, useState } from 'react';
 

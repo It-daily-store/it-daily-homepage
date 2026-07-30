@@ -7,9 +7,7 @@ import {
   View,
   StyleSheet,
   Image,
-  pdf,
 } from '@react-pdf/renderer';
-import { saveAs } from 'file-saver';
 import React from 'react';
 
 // Define styles for the PDF

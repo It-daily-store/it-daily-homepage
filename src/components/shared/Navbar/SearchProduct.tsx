@@ -3,13 +3,12 @@ import SearchField from '@/components/global/SearchField';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { calculateDiscountPrice } from '../Product/ProductCard';
 import { Separator } from '@/components/ui/separator';
 
 const SearchProduct = () => {
   return (
     <SearchField
-      render={({ products, categories, brands, loading, setOpen }) => {
+      render={({ products, categories, brands: _brands, loading, setOpen }) => {
         return (
           <div className="px-3 py-2">
             <>

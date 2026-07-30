@@ -1,7 +1,6 @@
 import { AlertCircle, ArrowLeft, Home } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { generateStaticParams } from '@/app/product/[slug]/page';
 
 const ProductNotFound = () => {
   return (

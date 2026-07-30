@@ -1,8 +1,7 @@
 'use client';
 import React from 'react';
 import { Button } from '../ui/button';
-import { CartProduct, TProduct } from '@/types/product.interface';
-import { calculateDiscountPrice } from '../shared/Product/ProductCard';
+import { TProduct } from '@/types/product.interface';
 import { IPcBuild, PcBuildSettings } from '@/types/pcbuilder';
 import { useRouter } from 'next/navigation';
 
@@ -15,10 +14,6 @@ const PcBuilderAction = ({
   partId: string;
   settings: PcBuildSettings;
 }) => {
-  const discountPrice = calculateDiscountPrice(
-    product?.price || 0,
-    product?.discount,
-  );
   const router = useRouter();
 
   const handleAddToPcBuilder = () => {

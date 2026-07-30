@@ -1,12 +1,12 @@
 'use client';
 import { verifyMe } from '@/actions/auth';
 import { AuthForm } from '@/components/common/AuthForm';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch } from '@/redux/hooks';
 import { removeUser, setUser } from '@/redux/reducers/authReducer';
 import React, { useState } from 'react';
 
 const SignUpPage = () => {
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
   const verify = async () => {

@@ -2,10 +2,6 @@ import React from 'react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { ArrowRightLeft, Computer, House, User } from 'lucide-react';
-import ComparePopover from './ComparePopover';
-import CartDrawer from './CartDrawer';
-import UserDropdown from './Navbar/UserDropdown';
-import ThemeButton from './Navbar/ThemeButton';
 
 const BottomBar = () => {
   return (

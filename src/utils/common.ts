@@ -4,7 +4,7 @@ export function isValidUrl(url: string): boolean {
     new URL(url);
 
     return true;
-  } catch (_) {
+  } catch {
     // Invalid URL format
     return false;
   }

@@ -63,7 +63,7 @@ const menus = [
 ];
 
 const UserDropdown = () => {
-  const { isAuthenticated, user } = useAppSelector((s) => s.auth);
+  const { user } = useAppSelector((s) => s.auth);
   const dispatch = useAppDispatch();
 
   const verify = async () => {

@@ -19,7 +19,7 @@ import RenderHtml from '@/components/global/editor/RenderHtml';
 
 const ComparePage = () => {
   const [compareItems, setCompareItems] = useState<TProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const { compareItems: storeItems } = useAppSelector((s) => s.compare);
   const dispatch = useAppDispatch();
 

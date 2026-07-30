@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/sheet';
 import { TTreeCategory } from '@/types/category.interface';
 import { generateCategoryTree } from '@/utils/category';
-import { ChevronDown, ChevronRight, PanelRight, X } from 'lucide-react';
+import { ChevronRight, PanelRight, X } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
