@@ -9,7 +9,7 @@ COPY package*.json ./
 RUN --mount=type=secret,id=npm_token \
     echo "@it-daily-store:registry=https://npm.pkg.github.com" > .npmrc && \
     echo "//npm.pkg.github.com/:_authToken=$(cat /run/secrets/npm_token)" >> .npmrc && \
-    npm ci && \
+    npm install && \
     rm .npmrc
 
 COPY . .
