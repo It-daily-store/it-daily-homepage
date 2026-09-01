@@ -57,7 +57,6 @@ const LoginForm = ({ verify }: { verify?: () => void }) => {
     try {
       const res = await loginAction(data);
       if (res.error) {
-        console.log(res.data);
         globalError(res.data);
       } else {
         if (!res.data?.isVerified) {

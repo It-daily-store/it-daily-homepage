@@ -87,7 +87,6 @@ export const verifyOtpAction = async (email: string, otp: string) => {
       email,
       otp,
     });
-    console.log(res.data);
     if (res?.data?.data) {
       cookieStore.set('gadget_grid_access_token', res?.data?.data?.accessToken);
       return {

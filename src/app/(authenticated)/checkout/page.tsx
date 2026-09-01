@@ -185,7 +185,6 @@ export default function Component() {
 
     try {
       const res = await addOrder(payload);
-      console.log(res);
       if (res.error) {
         globalServerError(res.data);
       } else {
@@ -265,7 +264,7 @@ export default function Component() {
                   <RadioGroup
                     onValueChange={(val) => {
                       const address = addresses.find((ad) => ad._id === val);
-                      console.log({ address });
+
                       form.setValue('shippingAddress', {
                         address: address?.address || '',
                         city: address?.city || '',

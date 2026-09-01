@@ -17,11 +17,8 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker Image
-        env:
-          NPM_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: |
           docker buildx build \
-            --secret id=npm_token,env=NPM_TOKEN \
             -t itdaily-frontend:latest \
             --load .
 

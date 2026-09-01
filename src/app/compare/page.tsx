@@ -31,7 +31,7 @@ const ComparePage = () => {
           const fetchedProducts = await fetchProductsByIds(
             storeItems?.map((item) => item.id),
           );
-          console.log(fetchedProducts);
+
           setCompareItems(fetchedProducts);
         } catch (error) {
           console.error('Failed to fetch products:', error);

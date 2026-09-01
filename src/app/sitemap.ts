@@ -15,8 +15,6 @@ async function getDynamicRoutes() {
 
     const data = await res.json();
 
-    console.log({ data });
-
     return { products: data?.data?.products, categories: data.data.categories };
   } catch (error) {
     console.error('Error fetching dynamic routes:', error);

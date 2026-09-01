@@ -29,7 +29,6 @@ const fetchOrder = async (orderId: string) => {
   try {
     const res = await instance.get(`/order/single/${orderId}`);
     const data = res.data?.data;
-    console.log(data);
     return data;
   } catch (err) {
     console.log(err);

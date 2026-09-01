@@ -6,11 +6,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN --mount=type=secret,id=npm_token \
-    echo "@it-daily-store:registry=https://npm.pkg.github.com" > .npmrc && \
-    echo "//npm.pkg.github.com/:_authToken=$(cat /run/secrets/npm_token)" >> .npmrc && \
-    npm install && \
-    rm .npmrc
+RUN npm install
 
 COPY . .
 
@@ -25,11 +21,7 @@ ENV NODE_ENV=production
 
 COPY package*.json ./
 
-RUN --mount=type=secret,id=npm_token \
-    echo "@it-daily-store:registry=https://npm.pkg.github.com" > .npmrc && \
-    echo "//npm.pkg.github.com/:_authToken=$(cat /run/secrets/npm_token)" >> .npmrc && \
-    npm ci --only=production && \
-    rm .npmrc
+RUN npm ci --only=production
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public

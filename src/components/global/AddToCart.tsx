@@ -10,7 +10,6 @@ const AddToCart: React.FC<ButtonProps> = (props) => {
     // Simulate adding to cart (replace with your actual cart logic)
     setTimeout(() => {
       setIsLoading(false);
-      console.log('Item added to cart!');
     }, 1000);
   };
 
