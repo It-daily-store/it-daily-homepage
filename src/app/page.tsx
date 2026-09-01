@@ -1,8 +1,15 @@
 import Banner from '@/components/homepage/Banner';
 import FeaturedProducts from '@/components/homepage/FeaturedProducts';
 import FeturedCategories from '@/components/homepage/FeturedCategories';
+import BestSellers from '@/components/homepage/BestSellers';
+import NewArrivals from '@/components/homepage/NewArrivals';
+import {
+  BrandRailSkeleton,
+  ProductRailSkeleton,
+} from '@/components/homepage/RailSkeleton';
+import ShopByBrand from '@/components/homepage/ShopByBrand';
 import { Metadata } from 'next';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 const websiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
@@ -84,10 +91,19 @@ const HomePage = () => {
         }}
       />
 
-      <div className="space-y-7 pb-4">
+      <div className="space-y-8 pb-6 sm:space-y-10 md:space-y-12">
         <Banner />
-        <FeturedCategories />
         <FeaturedProducts />
+        <FeturedCategories />
+        <Suspense fallback={<ProductRailSkeleton />}>
+          <NewArrivals />
+        </Suspense>
+        <Suspense fallback={<ProductRailSkeleton />}>
+          <BestSellers />
+        </Suspense>
+        <Suspense fallback={<BrandRailSkeleton />}>
+          <ShopByBrand />
+        </Suspense>
       </div>
     </>
   );

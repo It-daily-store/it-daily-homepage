@@ -58,6 +58,14 @@ export default function ProductCard({
     product?.discount,
   );
 
+  const primaryImage = isValidUrl(product?.thumbnail)
+    ? product?.thumbnail
+    : '/product-placeholder.jpg';
+
+  const hoverImage = product?.gallery?.find(
+    (image) => isValidUrl(image) && image !== primaryImage,
+  );
+
   return (
     <Card
       className={cn(
@@ -73,15 +81,23 @@ export default function ProductCard({
         )}
         <Link href={`/product/${product?.slug}`} className="block p-2">
           <Image
-            src={
-              isValidUrl(product?.thumbnail)
-                ? product?.thumbnail
-                : '/product-placeholder.jpg'
-            }
+            src={primaryImage}
             alt={product?.name}
             fill
-            className="object-contain transition-transform group-hover:scale-105"
+            className={cn(
+              'object-contain transition-all duration-500 ease-out group-hover:scale-105',
+              hoverImage && 'group-hover:opacity-0',
+            )}
           />
+          {hoverImage && (
+            <Image
+              src={hoverImage}
+              alt=""
+              aria-hidden
+              fill
+              className="object-contain opacity-0 transition-all duration-500 ease-out group-hover:scale-105 group-hover:opacity-100"
+            />
+          )}
         </Link>
       </div>
       <CardContent className="p-3">

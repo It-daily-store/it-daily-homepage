@@ -387,3 +387,7 @@ body {
 .html_render small {
   font-size: 0.8rem !important;
 }
+
+[data-rmiz-modal][open] [data-rmiz-modal-overlay='visible'] {
+  background-color: color-mix(in srgb, var(--background) 96%, transparent);
+}

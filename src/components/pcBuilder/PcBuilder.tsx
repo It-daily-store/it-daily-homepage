@@ -1,30 +1,35 @@
 'use client';
 import { IPcBuild, PcBuildSettings } from '@/types/pcbuilder';
-import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import Logo from '../shared/Navbar/Logo';
-import { Button } from '../ui/button';
-import { BaggageClaim, Cog, RefreshCcw, Save, X } from 'lucide-react';
-import Image from 'next/image';
-import { Badge } from '../ui/badge';
-import Link from 'next/link';
-import PcBuilderPdfButton from './PcBuilderPdfButton';
 import { handleAddToCart } from '@/lib/utils';
 import { TProduct } from '@/types/product.interface';
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Cpu, Keyboard } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { calculateDiscountPrice } from '../shared/Product/ProductCard';
+import PcBuildPartRow from './PcBuildPartRow';
+import PcBuildSummaryCard from './PcBuildSummaryCard';
 
 type TProps = {
   settings: PcBuildSettings | undefined;
 };
 
-const PcBuilder = ({ settings }: TProps) => {
-  const [build, setBuild] = useState<IPcBuild[]>(() => {
-    const localData = localStorage.getItem('pc-builder');
+const readStoredBuild = (): IPcBuild[] => {
+  // Runs during SSR too, where localStorage does not exist.
+  if (typeof window === 'undefined') {
+    return [];
+  }
 
-    const localBuild = localData ? JSON.parse(localData) : [];
-    return localBuild || [];
-  });
+  try {
+    const localData = window.localStorage.getItem('pc-builder');
+    return localData ? JSON.parse(localData) || [] : [];
+  } catch {
+    return [];
+  }
+};
+
+const PcBuilder = ({ settings }: TProps) => {
+  const [build, setBuild] = useState<IPcBuild[]>(readStoredBuild);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (settings) {
@@ -66,6 +71,27 @@ const PcBuilder = ({ settings }: TProps) => {
     0,
   );
 
+  const groups = useMemo(() => {
+    if (!settings) {
+      return [{ title: 'Components', icon: Cpu, parts: build }];
+    }
+
+    const coreIds = new Set(settings.coreComponents.parts.map((p) => p.id));
+
+    return [
+      {
+        title: settings.coreComponents.title || 'Core Components',
+        icon: Cpu,
+        parts: build.filter((b) => coreIds.has(b.id)),
+      },
+      {
+        title: settings.peripherals.title || 'Peripherals',
+        icon: Keyboard,
+        parts: build.filter((b) => !coreIds.has(b.id)),
+      },
+    ].filter((group) => group.parts.length > 0);
+  }, [settings, build]);
+
   const handleCart = () => {
     for (const product of build) {
       if (product.product) {
@@ -85,132 +111,53 @@ const PcBuilder = ({ settings }: TProps) => {
   };
 
   return (
-    <div className="mx-auto min-h-screen md:max-w-4xl">
-      <Card className="bg-background rounded-md">
-        <CardHeader className="flex-row items-center justify-between">
-          <CardTitle>
-            <Logo />
-          </CardTitle>
-          <div className="flex gap-2">
-            <Button
-              customClassName="flex-col"
-              variant={'primary_light'}
-              size={'sm'}
-              className="h-14"
-              onClick={handleCart}
-            >
-              <BaggageClaim size={18} />
-              Add To Cart
-            </Button>
-            <Button
-              customClassName="flex-col"
-              variant={'primary_light'}
-              className="h-14"
-              size={'sm'}
-            >
-              <Save size={18} />
-              Save PC
-            </Button>
-            <PcBuilderPdfButton build={build} />
-          </div>
-        </CardHeader>
-        <CardContent className="border-t pt-4 sm:px-8">
-          <div className="mb-2 flex items-center justify-between">
-            <h1 className="text-base font-semibold md:text-lg">
-              Daily It PC Builder: Build Your PC
-            </h1>
-            <div className="bg-pure-black/95 flex h-16 flex-col items-center justify-center gap-1 rounded-md px-3 md:min-w-28">
-              <p className="font-semibold text-white">
-                Total{' '}
-                <span className="text-xs text-white">
-                  (items: {build?.filter((b) => b.product !== undefined).length}
-                  )
-                </span>
-              </p>
-              <p className="text-white">${totalPrice}</p>
-            </div>
-          </div>
-          <div className="space-y-2">
-            {build?.map((bPart) => (
-              <div
-                key={bPart.id}
-                className="bg-card flex border-spacing-3 items-center gap-3 rounded-md border-2 border-dotted px-1 py-1"
-              >
-                <div className="bg-background flex size-14 items-center justify-center rounded-md">
-                  {bPart.product ? (
-                    <Image
-                      width={100}
-                      alt="part product image"
-                      src={
-                        bPart.product?.thumbnail || '/product-placeholder.jpg'
-                      }
-                      height={100}
-                    />
-                  ) : (
-                    <Cog />
-                  )}
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-dark-gray font-semibold">
-                    {bPart.name}{' '}
-                    {bPart.isRequired && (
-                      <Badge
-                        variant={'destructive'}
-                        className="bg-destructive/10 text-destructive px-1 py-0 text-xs"
-                      >
-                        Required
-                      </Badge>
-                    )}
-                  </h2>
-                  {bPart?.product && (
-                    <p className="text-sm">{bPart?.product?.name}</p>
-                  )}
-                </div>
-                {bPart?.product && (
-                  <p className="text-primary text-base font-semibold md:pr-5">
-                    $
-                    {calculateDiscountPrice(
-                      bPart?.product?.price || 0,
-                      bPart.product?.discount,
-                    )}
-                  </p>
-                )}
-
-                {bPart?.product && (
-                  <Button
-                    onClick={() => handleRemove(bPart.id)}
-                    className="sm:size-7"
-                    size={'icon'}
-                    variant={'danger_light'}
-                  >
-                    <X size={18} />
-                  </Button>
-                )}
-                {bPart.category && (
-                  <Link href={`/pc-builder/${bPart.id}`}>
-                    {bPart.product ? (
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            className="sm:size-7"
-                            size={'icon'}
-                            variant={'outline'}
-                          >
-                            <RefreshCcw size={17} />
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>Change</TooltipContent>
-                      </Tooltip>
-                    ) : (
-                      <Button>Choose</Button>
-                    )}
-                  </Link>
-                )}
+    <div className="grid items-start gap-4 lg:grid-cols-[1fr_20rem] lg:gap-6">
+      <div className="space-y-5">
+        {groups.map((group, groupIndex) => (
+          <motion.section
+            key={group.title}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.4,
+              delay: groupIndex * 0.08,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="bg-background rounded-2xl border p-3 sm:p-4"
+          >
+            <div className="mb-3 flex items-center gap-2.5">
+              <span className="bg-primary-light text-primary flex size-8 items-center justify-center rounded-lg">
+                <group.icon size={17} />
+              </span>
+              <div>
+                <h2 className="text-sm font-semibold sm:text-base">
+                  {group.title}
+                </h2>
+                <p className="text-gray text-xs">
+                  {group.parts.filter((p) => p.product).length} of{' '}
+                  {group.parts.length} selected
+                </p>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            </div>
+
+            <div className="space-y-2">
+              {group.parts.map((part) => (
+                <PcBuildPartRow
+                  key={part.id}
+                  part={part}
+                  onRemove={handleRemove}
+                />
+              ))}
+            </div>
+          </motion.section>
+        ))}
+      </div>
+
+      <PcBuildSummaryCard
+        build={build}
+        totalPrice={totalPrice}
+        onAddToCart={handleCart}
+      />
     </div>
   );
 };

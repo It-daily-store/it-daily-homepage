@@ -72,3 +72,7 @@ Redux Toolkit (`src/redux`) is used for **client-side UI/session state only** â€
 ### SEO
 
 Per-page `generateMetadata`/static `metadata` exports are treated as first-class (title templates, OpenGraph, Twitter cards, JSON-LD `Product`/`WebSite` structured data â€” see `src/app/product/[slug]/page.tsx` and `src/app/page.tsx`). `src/app/sitemap.ts` and `robots`-style metadata are backend-driven. When adding a new public page, follow the existing pages' pattern of setting `metadata`/`generateMetadata`, canonical `alternates.canonical`, and JSON-LD where relevant rather than leaving Next's defaults.
+
+## Code comments
+
+Do not comment everywhere. Add a comment only where the code cannot explain itself (a non-obvious workaround, a business rule, a deliberate edge case), and keep it to a single line.

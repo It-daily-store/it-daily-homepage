@@ -1,6 +1,8 @@
 import { TProduct } from '@/types/product.interface';
 import React from 'react';
 import ProductCard from '../shared/Product/ProductCard';
+import SectionHeading from './SectionHeading';
+import StaggerGrid from './StaggerGrid';
 
 const fetchProducts = async () => {
   try {
@@ -25,17 +27,24 @@ const FeaturedProducts = async () => {
   const data = await fetchProducts();
   const products: TProduct[] = data?.data || [];
 
+  if (!products.length) {
+    return null;
+  }
+
   return (
-    <div className="my-container">
-      <h2 className="pb-4 text-center text-2xl font-semibold text-black">
-        Featured Products
-      </h2>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
+    <section className="my-container" aria-label="Featured products">
+      <SectionHeading
+        eyebrow="Handpicked"
+        title="Featured Products"
+        subtitle="A curated shortlist of the gear our team rates highest right now."
+      />
+
+      <StaggerGrid className="grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
         {products.map((p) => (
           <ProductCard key={p._id} product={p} withAction />
         ))}
-      </div>
-    </div>
+      </StaggerGrid>
+    </section>
   );
 };
 

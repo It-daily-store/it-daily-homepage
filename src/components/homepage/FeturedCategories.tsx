@@ -1,8 +1,8 @@
 import { TCategory } from '@/types/category.interface';
 import React from 'react';
-import { Card, CardContent } from '../ui/card';
-import Image from 'next/image';
-import Link from 'next/link';
+import CategoryTile from './CategoryTile';
+import SectionHeading from './SectionHeading';
+import StaggerGrid from './StaggerGrid';
 
 const getData = async () => {
   try {
@@ -23,34 +23,24 @@ const FeturedCategories = async () => {
   const data = await getData();
   const categories: TCategory[] = data?.data || [];
 
+  if (!categories.length) {
+    return null;
+  }
+
   return (
-    <div className="my-container">
-      <h2 className="pb-4 text-center text-2xl font-semibold text-black">
-        Featured Categories
-      </h2>
-      <div className="3xl:grid-cols-10 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-8">
-        {categories?.map((cat) => (
-          <Card
-            key={cat._id}
-            className="bg-background-foreground hover:bg-primary-light h-36 w-full hover:shadow-lg"
-          >
-            <Link href={cat.slug}>
-              <CardContent className="flex h-full flex-col items-center justify-between gap-2 pt-6">
-                <Image
-                  src={cat.image || '/category-placeholder.png'}
-                  alt={cat.name}
-                  height={60}
-                  width={60}
-                />
-                <h2 className="text-center text-sm font-medium text-black">
-                  {cat.name}
-                </h2>
-              </CardContent>
-            </Link>
-          </Card>
+    <section className="my-container" aria-label="Featured categories">
+      <SectionHeading
+        eyebrow="Categories"
+        title="Featured Categories"
+        subtitle="Jump straight to the aisle you need."
+      />
+
+      <StaggerGrid className="xs:grid-cols-4 grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-3 md:grid-cols-6 xl:grid-cols-8">
+        {categories.map((cat) => (
+          <CategoryTile key={cat._id} category={cat} />
         ))}
-      </div>
-    </div>
+      </StaggerGrid>
+    </section>
   );
 };
 

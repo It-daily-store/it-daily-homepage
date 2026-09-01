@@ -15,17 +15,13 @@ export default function PcBuilderPdfButton({ build }: { build: IPcBuild[] }) {
   };
 
   return (
-    <>
-      <Button
-        onClick={handleDownload}
-        variant={'primary_light'}
-        customClassName="flex-col"
-        size={'sm'}
-        className="h-14"
-      >
-        <Download size={18} />
-        Download
-      </Button>
-    </>
+    <Button
+      onClick={handleDownload}
+      variant={'outline'}
+      className="w-full gap-2"
+    >
+      <Download size={17} />
+      Download PDF
+    </Button>
   );
 }

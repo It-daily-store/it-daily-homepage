@@ -11,3 +11,8 @@ export type TUpdateBrand = {
   name?: string;
   image?: string;
 };
+
+export type TStorefrontBrand = Pick<TBrand, '_id' | 'name'> & {
+  image?: string;
+  productCount: number;
+};
