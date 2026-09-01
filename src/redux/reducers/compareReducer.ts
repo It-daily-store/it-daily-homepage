@@ -1,8 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'sonner';
 
+export type TCompareItem = {
+  name: string;
+  id: string;
+  thumbnail?: string;
+  slug?: string;
+};
+
 type InitialState = {
-  compareItems: { name: string; id: string }[];
+  compareItems: TCompareItem[];
 };
 
 const initialState: InitialState = {
@@ -13,10 +20,7 @@ const compareSlice = createSlice({
   name: 'compare',
   initialState: initialState,
   reducers: {
-    addToCompare: (
-      state,
-      action: PayloadAction<{ name: string; id: string }>,
-    ) => {
+    addToCompare: (state, action: PayloadAction<TCompareItem>) => {
       const product = action.payload;
       const exist = state.compareItems?.find((item) => item.id === product?.id);
 

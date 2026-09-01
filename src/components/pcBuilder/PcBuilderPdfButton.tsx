@@ -6,7 +6,13 @@ import { IPcBuild } from '@/types/pcbuilder';
 import PcBuilderPdfSummary from './PcBuildSummary';
 import { saveAs } from 'file-saver';
 
-export default function PcBuilderPdfButton({ build }: { build: IPcBuild[] }) {
+export default function PcBuilderPdfButton({
+  build,
+  disabled,
+}: {
+  build: IPcBuild[];
+  disabled?: boolean;
+}) {
   const handleDownload = async () => {
     const doc = <PcBuilderPdfSummary buildData={build} />;
     const asPdf = pdf(doc);
@@ -19,6 +25,7 @@ export default function PcBuilderPdfButton({ build }: { build: IPcBuild[] }) {
       onClick={handleDownload}
       variant={'outline'}
       className="w-full gap-2"
+      disabled={disabled}
     >
       <Download size={17} />
       Download PDF

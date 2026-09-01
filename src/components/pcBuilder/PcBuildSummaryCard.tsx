@@ -98,11 +98,15 @@ const PcBuildSummaryCard = ({
           <BaggageClaim size={17} />
           Add {selected.length > 0 ? `${selected.length} items` : 'all'} to cart
         </Button>
-        <Button variant="outline" className="w-full gap-2">
+        <Button
+          disabled={selected.length === 0}
+          variant="outline"
+          className="w-full gap-2"
+        >
           <Save size={17} />
           Save PC
         </Button>
-        <PcBuilderPdfButton build={build} />
+        <PcBuilderPdfButton disabled={selected.length === 0} build={build} />
       </div>
     </aside>
   );

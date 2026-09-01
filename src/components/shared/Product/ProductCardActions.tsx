@@ -25,6 +25,8 @@ const ProductCardActions = ({ product }: { product: TProduct }) => {
         addToCompare({
           id: product._id,
           name: product.name,
+          thumbnail: product.thumbnail,
+          slug: product.slug,
         }),
       );
       setOpen(true);
