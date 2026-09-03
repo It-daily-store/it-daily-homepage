@@ -3,9 +3,12 @@ import { CartProduct, TProduct } from '@/types/product.interface';
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { Heart, ShoppingCart } from 'lucide-react';
-import { useAppDispatch } from '@/redux/hooks';
+import { ArrowLeftRight, Check, Heart, ShoppingCart, Zap } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { addToCart } from '@/redux/reducers/cartReducer';
+import { addToCompare } from '@/redux/reducers/compareReducer';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const ProductActions = ({
   product,
@@ -16,6 +19,10 @@ const ProductActions = ({
 }) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { compareItems } = useAppSelector((s) => s.compare);
+
+  const inCompare = compareItems?.some((item) => item.id === product?._id);
 
   const handleQuantity = (type: 'minus' | 'plus') => {
     if (type === 'minus' && quantity !== 1) {
@@ -25,30 +32,59 @@ const ProductActions = ({
     }
   };
 
-  const handleAddToCart = () => {
-    const cartProduct: CartProduct = {
-      _id: product?._id,
-      name: product?.name,
-      price: discountPrice,
-      slug: product?.slug,
-      quantity: quantity,
-      shipping: product?.shipping?.free ? 0 : product?.shipping.cost,
-      thumbnail: product?.thumbnail,
-      tax: product?.tax,
-      offer: product?.flashSale
+  const buildCartProduct = (): CartProduct => ({
+    _id: product?._id,
+    name: product?.name,
+    price: discountPrice,
+    slug: product?.slug,
+    quantity: quantity,
+    shipping: product?.shipping?.free ? 0 : product?.shipping.cost,
+    thumbnail: product?.thumbnail,
+    tax: product?.tax,
+    offer: product?.flashSale
+      ? {
+          refId: product.flashSale._id,
+          type: 'flashSale',
+        }
+      : product.activeDeal
         ? {
-            refId: product.flashSale._id,
-            type: 'flashSale',
+            refId: product.activeDeal._id,
+            type: 'deal',
           }
-        : product.activeDeal
-          ? {
-              refId: product.activeDeal._id,
-              type: 'deal',
-            }
-          : undefined,
-    };
+        : undefined,
+  });
 
-    dispatch(addToCart({ item: cartProduct, openCart: true }));
+  const handleAddToCart = () => {
+    dispatch(addToCart({ item: buildCartProduct(), openCart: true }));
+  };
+
+  const handleBuyNow = () => {
+    dispatch(addToCart({ item: buildCartProduct(), openCart: false }));
+    router.push('/checkout');
+  };
+
+  const handleAddToCompare = () => {
+    if (inCompare) {
+      toast.info('This product is already in compare');
+      return;
+    }
+
+    if (compareItems.length >= 4) {
+      toast.warning(
+        'You already have 4 products in compare. Please remove some to add new',
+      );
+      return;
+    }
+
+    dispatch(
+      addToCompare({
+        id: product._id,
+        name: product.name,
+        thumbnail: product.thumbnail,
+        slug: product.slug,
+      }),
+    );
+    toast.success('Added to compare');
   };
 
   return (
@@ -90,14 +126,46 @@ const ProductActions = ({
 
       <div className="flex flex-col gap-2 sm:flex-row">
         {product?.quantity !== 0 && (
-          <Button onClick={handleAddToCart} className="md:flex-1" size="lg">
-            <ShoppingCart className="mr-2 h-4 w-4" />
-            Add to Cart
-          </Button>
+          <>
+            <Button
+              onClick={handleAddToCart}
+              variant="default"
+              className="md:flex-1"
+              size="lg"
+            >
+              <ShoppingCart className="mr-2 h-4 w-4" />
+              Add to Cart
+            </Button>
+            <Button
+              onClick={handleBuyNow}
+              variant="secondary"
+              className="md:flex-1"
+              size="lg"
+            >
+              <Zap className="mr-2 h-4 w-4" />
+              Buy Now
+            </Button>
+          </>
         )}
-        <Button variant="secondary" size="lg">
+      </div>
+
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <Button variant="outline" size="lg" className="md:flex-1">
           <Heart className="mr-2 h-4 w-4" />
           Add to Wishlist
+        </Button>
+        <Button
+          onClick={handleAddToCompare}
+          variant="outline"
+          size="lg"
+          className="md:flex-1"
+        >
+          {inCompare ? (
+            <Check className="mr-2 h-4 w-4" />
+          ) : (
+            <ArrowLeftRight className="mr-2 h-4 w-4" />
+          )}
+          {inCompare ? 'In Compare' : 'Compare'}
         </Button>
       </div>
     </div>
