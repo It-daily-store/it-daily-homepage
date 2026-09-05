@@ -33,7 +33,7 @@ const ProductGallery = ({ product }: { product: TProduct }) => {
             width={1000}
             priority
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="h-full w-full object-contain"
+            className="h-full max-h-[500px] w-full object-contain"
           />
         </Zoom>
       </div>
