@@ -24,6 +24,8 @@ import {
 import Image from 'next/image';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import OrderStatusTimeline from '@/components/orders/OrderStatusTimeline';
+import { getOrderStatusConfig } from '@/lib/orderStatus';
 
 const fetchOrder = async (orderId: string) => {
   try {
@@ -33,27 +35,6 @@ const fetchOrder = async (orderId: string) => {
   } catch (err) {
     console.log(err);
     return undefined;
-  }
-};
-
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case 'pending':
-      return 'bg-yellow-100 text-yellow-800';
-    case 'confirmed':
-      return 'bg-blue-100 text-blue-800';
-    case 'processing':
-      return 'bg-orange-100 text-orange-800';
-    case 'shipped':
-      return 'bg-purple-100 text-purple-800';
-    case 'delivered':
-      return 'bg-green-100 text-green-800';
-    case 'cancelled':
-      return 'bg-red-100 text-red-800';
-    case 'returned':
-      return 'bg-gray-100 text-gray-800';
-    default:
-      return 'bg-gray-100 text-gray-800';
   }
 };
 
@@ -125,7 +106,7 @@ const OrderDetails = async ({
             </p>
           </div>
           <div className="ml-auto">
-            <Badge className={getStatusColor(order.currentStatus)}>
+            <Badge className={getOrderStatusConfig(order.currentStatus).badge}>
               {order.currentStatus.charAt(0).toUpperCase() +
                 order.currentStatus.slice(1)}
             </Badge>
@@ -207,58 +188,7 @@ const OrderDetails = async ({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="relative">
-                {/* Timeline line */}
-                <div className="absolute top-0 bottom-0 left-3 w-0.5 bg-gray-200"></div>
-
-                <div className="space-y-3">
-                  {order.statusHistory.map((status, index) => {
-                    const isCompleted = true; // All items in history are completed
-
-                    return (
-                      <div
-                        key={index}
-                        className="relative flex items-start gap-4"
-                      >
-                        {/* Timeline dot */}
-                        <div
-                          className={`relative z-10 flex size-6 items-center justify-center rounded-full border-2 ${
-                            isCompleted
-                              ? 'border-primary bg-green-100'
-                              : 'border-gray-300 bg-gray-100'
-                          }`}
-                        >
-                          <div
-                            className={`h-3 w-3 rounded-full ${isCompleted ? 'bg-primary' : 'bg-gray-300'}`}
-                          ></div>
-                        </div>
-
-                        {/* Content */}
-                        <div className="min-w-0 flex-1 pb-6">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <Badge className={getStatusColor(status.status)}>
-                                {status.status.charAt(0).toUpperCase() +
-                                  status.status.slice(1)}
-                              </Badge>
-                            </div>
-                            <div className="text-dark-gray text-sm">
-                              {dayjs(status.timestamp).format(
-                                'MMMM D, YYYY h:mm A',
-                              )}
-                            </div>
-                          </div>
-                          {status.notes && (
-                            <p className="text-dark-gray mt-2 text-sm">
-                              {status.notes}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              <OrderStatusTimeline history={order.statusHistory} />
             </CardContent>
           </Card>
 
