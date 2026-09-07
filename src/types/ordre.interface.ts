@@ -24,6 +24,7 @@ export interface IOrderItem {
 export interface IStatusHistory {
   status:
     | 'pending'
+    | 'confirmed'
     | 'processing'
     | 'shipped'
     | 'delivered'
