@@ -24,3 +24,19 @@ export interface IPcBuild {
   isRequired: boolean;
   product?: Partial<TProduct>;
 }
+
+export interface ISavedBuildPart {
+  partId: number;
+  name: string;
+  category?: string;
+  isRequired: boolean;
+  product: Partial<TProduct> | null;
+}
+
+export interface ISavedBuild {
+  _id: string;
+  name: string;
+  parts: ISavedBuildPart[];
+  createdAt?: string;
+  updatedAt?: string;
+}

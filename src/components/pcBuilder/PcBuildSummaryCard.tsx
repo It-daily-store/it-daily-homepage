@@ -3,9 +3,10 @@
 import { Button } from '@/components/ui/button';
 import { IPcBuild } from '@/types/pcbuilder';
 import { AnimatePresence, motion } from 'framer-motion';
-import { BaggageClaim, CheckCircle2, Save, TriangleAlert } from 'lucide-react';
+import { BaggageClaim, CheckCircle2, TriangleAlert } from 'lucide-react';
 import React from 'react';
 import PcBuilderPdfButton from './PcBuilderPdfButton';
+import SaveBuildDialog from './SaveBuildDialog';
 
 const PcBuildSummaryCard = ({
   build,
@@ -98,14 +99,7 @@ const PcBuildSummaryCard = ({
           <BaggageClaim size={17} />
           Add {selected.length > 0 ? `${selected.length} items` : 'all'} to cart
         </Button>
-        <Button
-          disabled={selected.length === 0}
-          variant="outline"
-          className="w-full gap-2"
-        >
-          <Save size={17} />
-          Save PC
-        </Button>
+        <SaveBuildDialog build={build} disabled={selected.length === 0} />
         <PcBuilderPdfButton disabled={selected.length === 0} build={build} />
       </div>
     </aside>

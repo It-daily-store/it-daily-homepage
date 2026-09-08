@@ -112,6 +112,7 @@ export default function Component() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [addresses, setAddresses] = useState<IAddress[]>([]);
+  const [selectedAddressId, setSelectedAddressId] = useState('');
 
   useEffect(() => {
     const fetchAddress = async () => {
@@ -120,7 +121,23 @@ export default function Component() {
         if (res.error) {
           globalError(res.data);
         } else {
-          setAddresses(res.data || []);
+          const list: IAddress[] = res.data || [];
+          setAddresses(list);
+
+          const preferred = list.find((ad) => ad.isDefault);
+
+          if (preferred) {
+            setSelectedAddressId(preferred._id);
+            const values = {
+              address: preferred.address,
+              city: preferred.city,
+              district: preferred.district,
+            };
+            form.setValue('shippingAddress', values);
+            if (sameAsShipping) {
+              form.setValue('billingAddress', values);
+            }
+          }
         }
       } catch (err: any) {
         globalError(err.data);
@@ -262,8 +279,10 @@ export default function Component() {
               <CardContent className="space-y-4 p-4 pt-0">
                 {addresses?.length > 0 && (
                   <RadioGroup
+                    value={selectedAddressId}
                     onValueChange={(val) => {
                       const address = addresses.find((ad) => ad._id === val);
+                      setSelectedAddressId(val);
 
                       form.setValue('shippingAddress', {
                         address: address?.address || '',
@@ -299,6 +318,11 @@ export default function Component() {
                         />
                         <Label htmlFor={address._id}>
                           <div className="flex flex-col gap-2">
+                            {address.isDefault && (
+                              <span className="bg-secondary/15 text-secondary-foreground w-fit rounded-full px-2 py-0.5 text-[10px] font-semibold">
+                                Default
+                              </span>
+                            )}
                             <div className="flex items-center gap-1">
                               <h2>District:</h2>
                               <p className="text-dark-gray">
