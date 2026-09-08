@@ -44,7 +44,7 @@ const menus = [
   },
   {
     id: 4,
-    url: '/saved-pc-build',
+    url: '/pc-builds',
     label: 'Saved PC builds',
     icon: Computer,
   },

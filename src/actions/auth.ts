@@ -177,3 +177,21 @@ export const resetPasswordAction = async (payload: {
     };
   }
 };
+
+export const updatePasswordAction = async (payload: {
+  currentPassword: string;
+  newPassword: string;
+}) => {
+  try {
+    const res = await instance.post('/auth/update-password', payload);
+    return {
+      message: res?.data?.message,
+      data: res?.data?.data,
+    };
+  } catch (err: any) {
+    return {
+      error: true,
+      data: err.response?.data,
+    };
+  }
+};

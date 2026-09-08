@@ -50,7 +50,7 @@ const links = [
   },
   {
     label: 'Password',
-    url: '/Password',
+    url: '/change-password',
     icon: LockKeyhole,
     id: 6,
   },
