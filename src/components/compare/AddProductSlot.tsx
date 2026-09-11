@@ -6,9 +6,12 @@ import { isValidUrl } from '@/utils/common';
 import { Plus } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
+import { useTrackEvent } from '@/providers/MetaPixelProvider';
+import { metaContentId } from '@/lib/metaPixel/contentId';
 
 const AddProductSlot = ({ remaining }: { remaining: number }) => {
   const dispatch = useAppDispatch();
+  const track = useTrackEvent();
 
   return (
     <div className="hover:border-primary/60 flex h-full flex-col items-center justify-center gap-1.5 rounded-lg border border-dashed p-3 text-center transition-colors">
@@ -53,6 +56,9 @@ const AddProductSlot = ({ remaining }: { remaining: number }) => {
                     slug: product.slug,
                   }),
                 );
+                track('compare_add', {
+                  custom: { content_ids: [metaContentId(product)] },
+                });
                 setOpen(false);
               }}
               className="hover:bg-primary-light border-border/40 flex w-full cursor-pointer items-center gap-2 border-b p-2 text-left last:border-none"

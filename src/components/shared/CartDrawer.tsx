@@ -30,6 +30,9 @@ import {
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { isValidUrl } from '@/utils/common';
+import { useEffect, useRef } from 'react';
+import { useTrackEvent } from '@/providers/MetaPixelProvider';
+import { metaContentIds } from '@/lib/metaPixel/contentId';
 
 const formatPrice = (value: number) => `৳${(value || 0).toLocaleString()}`;
 
@@ -50,6 +53,31 @@ const CartDrawer = () => {
   const total = subtotal + totalShipping + totalTax;
 
   const totalUnits = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const track = useTrackEvent();
+  const cartViewedRef = useRef(false);
+
+  // There is no cart page — opening the drawer is the cart view.
+  useEffect(() => {
+    if (!cartOpen) {
+      cartViewedRef.current = false;
+      return;
+    }
+
+    if (cartViewedRef.current || cartItems.length === 0) {
+      return;
+    }
+
+    cartViewedRef.current = true;
+    track('cart_view', {
+      custom: {
+        content_ids: metaContentIds(cartItems),
+        content_type: 'product',
+        value: subtotal,
+        num_items: totalUnits,
+      },
+    });
+  }, [cartOpen, cartItems, subtotal, totalUnits, track]);
 
   const handleQuantityChange = (id: string, newQuantity: number) => {
     if (newQuantity <= 0) {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -52,6 +52,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getMyAddresses } from '@/actions/address';
 import { IAddress } from '@/types/address';
+import { useTrackEvent } from '@/providers/MetaPixelProvider';
+import { metaContentIds, metaContents } from '@/lib/metaPixel/contentId';
 
 // Zod schema for form validation
 const checkoutSchema = z.object({
@@ -180,6 +182,29 @@ export default function Component() {
     { total: 0, shipping: 0, tax: 0 },
   );
 
+  const totalUnits = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const track = useTrackEvent();
+  const checkoutStartedRef = useRef(false);
+
+  // The cart rehydrates from storage after mount, so wait for it before firing once.
+  useEffect(() => {
+    if (checkoutStartedRef.current || cartItems.length === 0) {
+      return;
+    }
+
+    checkoutStartedRef.current = true;
+    track('checkout_start', {
+      custom: {
+        content_ids: metaContentIds(cartItems),
+        content_type: 'product',
+        contents: metaContents(cartItems),
+        value: cartSummary.total,
+        num_items: totalUnits,
+      },
+    });
+  }, [cartItems, cartSummary.total, totalUnits, track]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   // Form submission handler
   const onSubmit = async (data: CheckoutFormValues) => {
@@ -206,6 +231,16 @@ export default function Component() {
         globalServerError(res.data);
       } else {
         toast.success(res?.message);
+        track('checkout_success', {
+          orderId: res?.data?.order?._id,
+          custom: {
+            content_ids: metaContentIds(cartItems),
+            content_type: 'product',
+            contents: metaContents(cartItems),
+            value: cartSummary.total,
+            num_items: totalUnits,
+          },
+        });
         dispatch(clearCart());
         if (res.data?.sessionId) {
           router.push(res.data?.sessionId);

@@ -8,6 +8,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { calculateDiscountPrice } from '../shared/Product/ProductCard';
 import PcBuildPartRow from './PcBuildPartRow';
 import PcBuildSummaryCard from './PcBuildSummaryCard';
+import { useTrackAddToCart } from '@/lib/metaPixel/useTrackAddToCart';
 
 type TProps = {
   settings: PcBuildSettings | undefined;
@@ -30,6 +31,7 @@ const readStoredBuild = (): IPcBuild[] => {
 const PcBuilder = ({ settings }: TProps) => {
   const [build, setBuild] = useState<IPcBuild[]>(readStoredBuild);
   const reduceMotion = useReducedMotion();
+  const trackAddToCart = useTrackAddToCart();
 
   useEffect(() => {
     if (settings) {
@@ -93,11 +95,10 @@ const PcBuilder = ({ settings }: TProps) => {
   }, [settings, build]);
 
   const handleCart = () => {
-    for (const product of build) {
-      if (product.product) {
-        handleAddToCart(product.product as TProduct);
-      }
-    }
+    const added = build
+      .filter((part) => part.product)
+      .map((part) => handleAddToCart(part.product as TProduct));
+    trackAddToCart(added);
   };
 
   useEffect(() => {

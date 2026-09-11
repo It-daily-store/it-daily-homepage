@@ -120,6 +120,7 @@ export type TProduct = {
 
 export type CartProduct = {
   _id: string;
+  sku?: string;
   name: string;
   price: number;
   quantity: number;

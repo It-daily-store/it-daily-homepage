@@ -19,6 +19,7 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useTrackEvent } from '@/providers/MetaPixelProvider';
 
 const loginSchema = z.object({
   email: z.email('Invalid email address'),
@@ -52,6 +53,7 @@ const LoginForm = ({ verify }: { verify?: () => void }) => {
   });
 
   const router = useRouter();
+  const track = useTrackEvent();
   // Form submission handler
   const onSubmit = async (data: LoginFormValues) => {
     try {
@@ -63,6 +65,7 @@ const LoginForm = ({ verify }: { verify?: () => void }) => {
           router.push(`/verify-email?email=${data.email}`);
           toast.warning(res?.message);
         } else {
+          track('login');
           verify?.();
           toast.success(res?.message);
         }

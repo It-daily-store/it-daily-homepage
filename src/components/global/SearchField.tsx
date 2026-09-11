@@ -8,6 +8,7 @@ import { fetchSearchProducts } from '@/actions/product';
 import { TBrand } from '@/types/brand.interface';
 import { TCategory } from '@/types/category.interface';
 import { cn } from '@/lib/utils';
+import { useTrackEvent } from '@/providers/MetaPixelProvider';
 
 const SearchField = ({
   render,
@@ -36,6 +37,8 @@ const SearchField = ({
   const [suggestionOpen, setSuggestionOpen] = useState(false);
   const [searching, setSearching] = useState(false);
   const suggestionRef = useRef<HTMLDivElement | null>(null);
+  const track = useTrackEvent();
+  const trackedTermRef = useRef<string | null>(null);
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
@@ -68,6 +71,12 @@ const SearchField = ({
           setProducts(fetchedData?.products || []);
           setCategories(fetchedData?.categories || []);
           setBrands(fetchedData?.brands || []);
+
+          // Typeahead has no submit, so a settled debounced term is the search event.
+          if (trackedTermRef.current !== debouncedSearchTerm) {
+            trackedTermRef.current = debouncedSearchTerm;
+            track('search', { custom: { search_string: debouncedSearchTerm } });
+          }
         } catch (error) {
           console.error('Failed to fetch products:', error);
         } finally {

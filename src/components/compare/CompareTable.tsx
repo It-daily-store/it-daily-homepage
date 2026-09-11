@@ -15,6 +15,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import AddProductSlot from './AddProductSlot';
+import { useTrackAddToCart } from '@/lib/metaPixel/useTrackAddToCart';
 import type { TCompareGroup } from './compareRows';
 
 const MAX_ITEMS = 4;
@@ -36,6 +37,7 @@ const CompareTable = ({
   onRemove,
 }: TProps) => {
   const reduceMotion = useReducedMotion();
+  const trackAddToCart = useTrackAddToCart();
   const scrollRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
   const stickyGridRef = useRef<HTMLDivElement>(null);
@@ -380,7 +382,7 @@ const CompareTable = ({
               <Button
                 size="sm"
                 disabled={!product?.quantity}
-                onClick={() => handleAddToCart(product)}
+                onClick={() => trackAddToCart([handleAddToCart(product)])}
                 className="w-full gap-1.5"
               >
                 <ShoppingCart size={14} />
