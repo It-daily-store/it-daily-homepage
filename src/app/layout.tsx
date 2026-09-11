@@ -10,6 +10,8 @@ import { Footer } from '@/components/shared/Footer';
 import { AuthProvider } from '@/providers/AuthProvider';
 import Script from 'next/script';
 import BottomBar from '@/components/shared/BottomBar';
+import { getMetaPixelPublicConfig } from '@/lib/metaPixel/getPublicConfig';
+import { MetaPixelProvider } from '@/providers/MetaPixelProvider';
 
 const beVietnam = Be_Vietnam_Pro({
   variable: '--font-be-vietnam',
@@ -44,11 +46,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const metaPixelConfig = await getMetaPixelPublicConfig();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -76,18 +80,20 @@ export default function RootLayout({
           defaultTheme="light"
           // enableSystem={true}
         >
-          <div className="bg-background">
-            <NextTopLoader color="#f85a16" showSpinner={false} />
-            <ReduxProvider>
-              <AuthProvider>
-                <NavbarMain />
-                {children}
-                <Footer />
-                <BottomBar />
-              </AuthProvider>
-            </ReduxProvider>
-          </div>
-          <Toaster richColors position="top-center" />
+          <MetaPixelProvider config={metaPixelConfig}>
+            <div className="bg-background">
+              <NextTopLoader color="#f85a16" showSpinner={false} />
+              <ReduxProvider>
+                <AuthProvider>
+                  <NavbarMain />
+                  {children}
+                  <Footer />
+                  <BottomBar />
+                </AuthProvider>
+              </ReduxProvider>
+            </div>
+            <Toaster richColors position="top-center" />
+          </MetaPixelProvider>
         </ThemeProvider>
       </body>
     </html>
