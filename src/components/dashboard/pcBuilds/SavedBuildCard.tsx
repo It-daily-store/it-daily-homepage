@@ -3,6 +3,7 @@
 import { calculateDiscountPrice } from '@/components/shared/Product/ProductCard';
 import { Button } from '@/components/ui/button';
 import { handleAddToCart } from '@/lib/utils';
+import { useTrackAddToCart } from '@/lib/metaPixel/useTrackAddToCart';
 import { ISavedBuild } from '@/types/pcbuilder';
 import { TProduct } from '@/types/product.interface';
 import dayjs from 'dayjs';
@@ -29,6 +30,7 @@ type TProps = {
 
 const SavedBuildCard = ({ build, index, onRename, onDelete }: TProps) => {
   const router = useRouter();
+  const trackAddToCart = useTrackAddToCart();
 
   const availableParts = build.parts.filter((part) => part.product);
   const missingCount = build.parts.length - availableParts.length;
@@ -65,9 +67,10 @@ const SavedBuildCard = ({ build, index, onRename, onDelete }: TProps) => {
   };
 
   const handleCart = () => {
-    for (const part of availableParts) {
-      handleAddToCart(part.product as TProduct);
-    }
+    const added = availableParts.map((part) =>
+      handleAddToCart(part.product as TProduct),
+    );
+    trackAddToCart(added);
   };
 
   return (

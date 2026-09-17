@@ -19,6 +19,8 @@ import { Loader, Save } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useTrackEvent } from '@/providers/MetaPixelProvider';
+import { metaContentIds } from '@/lib/metaPixel/contentId';
 
 const SaveBuildDialog = ({
   build,
@@ -32,6 +34,7 @@ const SaveBuildDialog = ({
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const track = useTrackEvent();
 
   const selected = build.filter((part) => part.product?._id);
 
@@ -70,6 +73,11 @@ const SaveBuildDialog = ({
       if (res?.error) {
         globalError(res.data);
       } else {
+        track('pc_builder_save', {
+          custom: {
+            content_ids: metaContentIds(selected.map((part) => part.product)),
+          },
+        });
         toast.success(res?.message);
         setOpen(false);
       }

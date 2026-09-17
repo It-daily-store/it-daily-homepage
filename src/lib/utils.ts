@@ -37,6 +37,7 @@ export const handleAddToCart = (product: TProduct) => {
 
   const cartProduct: CartProduct = {
     _id: product?._id,
+    sku: product?.sku,
     name: product?.name,
     price: discountPrice,
     slug: product?.slug,
@@ -46,7 +47,7 @@ export const handleAddToCart = (product: TProduct) => {
     tax: product?.tax,
   };
 
-  console.log(cartProduct);
-
   store.dispatch(addToCart({ item: cartProduct, openCart: true }));
+
+  return cartProduct;
 };

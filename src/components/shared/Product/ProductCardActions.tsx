@@ -9,11 +9,16 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { handleAddToCart } from '@/lib/utils';
+import { useTrackEvent } from '@/providers/MetaPixelProvider';
+import { useTrackAddToCart } from '@/lib/metaPixel/useTrackAddToCart';
+import { metaContentId } from '@/lib/metaPixel/contentId';
 
 const ProductCardActions = ({ product }: { product: TProduct }) => {
   const { compareItems } = useAppSelector((s) => s.compare);
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
+  const track = useTrackEvent();
+  const trackAddToCart = useTrackAddToCart();
 
   const handleAddToCompare = () => {
     if (compareItems.length >= 4) {
@@ -29,6 +34,9 @@ const ProductCardActions = ({ product }: { product: TProduct }) => {
           slug: product.slug,
         }),
       );
+      track('compare_add', {
+        custom: { content_ids: [metaContentId(product)] },
+      });
       setOpen(true);
     }
   };
@@ -37,7 +45,7 @@ const ProductCardActions = ({ product }: { product: TProduct }) => {
     <div className="flex w-full items-center justify-between">
       {product?.quantity > 0 ? (
         <Button
-          onClick={() => handleAddToCart(product)}
+          onClick={() => trackAddToCart([handleAddToCart(product)])}
           icon={<ShoppingCart size={16} />}
           tooltip="Add to Cart"
           variant="foreground"

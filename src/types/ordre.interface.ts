@@ -86,4 +86,11 @@ export type AddOrderPayload = {
   paymentMethod: 'card' | 'paypal' | 'bank_transfer' | 'cod';
   shippingMethod: 'standard' | 'express' | 'overnight';
   saveAddress: boolean;
+  tracking?: {
+    fbp?: string;
+    fbc?: string;
+    fbclid?: string;
+    eventSourceUrl?: string;
+    eventId?: string;
+  };
 };

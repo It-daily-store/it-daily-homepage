@@ -8,6 +8,7 @@ import {
 } from '../ui/breadcrumb';
 import Link from 'next/link';
 import { Home } from 'lucide-react';
+import MetaPixelCategoryView from '@/components/metaPixel/MetaPixelCategoryView';
 
 const fetchData = async (slug: string) => {
   try {
@@ -34,6 +35,7 @@ const CategoryPageTopSection = async ({ slug }: { slug: string }) => {
 
   return (
     <>
+      <MetaPixelCategoryView category={category?.name} />
       {categories?.length > 0 && (
         <Breadcrumb>
           <BreadcrumbList>

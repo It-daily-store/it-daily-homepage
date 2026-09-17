@@ -18,6 +18,7 @@ import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useTrackEvent } from '@/providers/MetaPixelProvider';
 
 const registerSchema = z.object({
   email: z.email('Invalid email address'),
@@ -38,6 +39,7 @@ export type RegisterFormValues = z.infer<typeof registerSchema>;
 const RegisterForm = ({ verify: _verify }: { verify?: () => void }) => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const track = useTrackEvent();
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -61,6 +63,7 @@ const RegisterForm = ({ verify: _verify }: { verify?: () => void }) => {
       if (res?.error) {
         globalError(res.data);
       } else {
+        track('signup');
         toast.success(res?.message || 'Registration successfull');
         router.push(`/verify-email?email=${data.email}&tab=otp`);
       }
