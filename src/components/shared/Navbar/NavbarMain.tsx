@@ -27,7 +27,10 @@ async function NavbarMain() {
   return (
     <>
       <Topbar />
-      <div className="bg-background sticky top-0 z-50 mx-auto hidden w-full rounded-none border-b px-2 py-2 shadow-md xl:flex">
+      <div
+        data-sticky-header
+        className="bg-background sticky top-0 z-50 mx-auto hidden w-full rounded-none border-b px-2 py-2 shadow-md xl:flex"
+      >
         <div className="my-container flex justify-between gap-1">
           {categoryTree?.map((cat, i) => {
             return (
