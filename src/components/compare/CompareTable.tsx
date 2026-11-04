@@ -43,6 +43,7 @@ const CompareTable = ({
   const stickyGridRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const [showSticky, setShowSticky] = useState(false);
+  const [headerOffset, setHeaderOffset] = useState(0);
 
   const showAddSlot = products.length < MAX_ITEMS;
   const columns = products.length + (showAddSlot ? 1 : 0);
@@ -77,6 +78,34 @@ const CompareTable = ({
       window.removeEventListener('resize', syncOffset);
     };
   }, [columns]);
+
+  // Which navbar parts stick (and their height) changes per breakpoint, so measure instead of hardcoding.
+  useEffect(() => {
+    const headers = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-sticky-header]'),
+    );
+
+    const measure = () => {
+      setHeaderOffset(
+        Math.max(
+          0,
+          ...headers
+            .filter((el) => getComputedStyle(el).position === 'sticky')
+            .map((el) => el.offsetHeight),
+        ),
+      );
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    headers.forEach((el) => observer.observe(el));
+    window.addEventListener('resize', measure);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
 
   // The rail is sticky, so its own top is the exact line the header must cross.
   useEffect(() => {
@@ -122,15 +151,13 @@ const CompareTable = ({
     <div className="relative">
       <div
         ref={railRef}
-        className={cn(
-          'sticky top-[68px] z-30 h-0 sm:top-[72px] lg:top-0 xl:top-[37px]',
-          GRID_VARS,
-        )}
+        className={cn('sticky z-30 h-0', GRID_VARS)}
+        style={{ top: headerOffset }}
       >
         <div
           aria-hidden={!showSticky}
           className={cn(
-            'bg-background/95 flex overflow-hidden rounded-lg border shadow-lg backdrop-blur transition-all duration-300',
+            'bg-background flex overflow-hidden rounded-b-lg border shadow-md transition-all duration-300',
             showSticky
               ? 'translate-y-0 opacity-100'
               : 'pointer-events-none -translate-y-3 opacity-0',

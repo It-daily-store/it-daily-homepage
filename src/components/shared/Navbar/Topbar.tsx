@@ -13,7 +13,10 @@ import MobileSearch from './MobileSearch';
 
 const Topbar = () => {
   return (
-    <div className="bg-pure-black/95 sticky top-0 z-50 lg:static lg:z-10">
+    <div
+      data-sticky-header
+      className="bg-pure-black/95 sticky top-0 z-50 lg:static lg:z-10"
+    >
       <div className="my-container grid w-full grid-cols-3 items-center justify-between py-3 md:flex">
         <MobileCategoryMenu />
         <Link href={'/'} className="flex justify-center">
