@@ -50,7 +50,7 @@ const getProducts = async (
   try {
     const res = await fetch(buildApiUrl(id, query), {
       cache: 'force-cache',
-      next: { revalidate: 120 },
+      next: { revalidate: 120, tags: ['products'] },
     });
     const data = await res.json();
 

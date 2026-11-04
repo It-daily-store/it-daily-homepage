@@ -10,6 +10,7 @@ const fetchBrands = async () => {
         cache: 'force-cache',
         next: {
           revalidate: 600,
+          tags: ['products'],
         },
       },
     );

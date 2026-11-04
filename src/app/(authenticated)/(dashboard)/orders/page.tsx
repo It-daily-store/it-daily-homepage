@@ -103,9 +103,12 @@ const OrdersPage = async () => {
               className="hover:bg-background-foreground border-b"
             >
               <TableCell className="px-3 py-2">
-                <span className="cursor-pointer font-medium text-blue-600 hover:text-blue-800">
+                <Link
+                  href={`/orders/${order.orderNumber}`}
+                  className="font-medium text-blue-600 hover:text-blue-800 hover:underline"
+                >
                   {order.orderNumber}
-                </span>
+                </Link>
               </TableCell>
               <TableCell className="text-dark-gray px-3 py-2">
                 {dayjs(order.createdAt).format('DD/MM/YYYY')}

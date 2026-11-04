@@ -24,7 +24,7 @@ const fetchBrandProducts = async (
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/by-brand/${brandId}?page=${page}&limit=${limit}`,
       {
         cache: 'force-cache',
-        next: { revalidate: 120 },
+        next: { revalidate: 120, tags: ['products'] },
       },
     );
     const data = await res.json();
@@ -39,6 +39,24 @@ const fetchBrandProducts = async (
     return { brand: undefined, products: [], total: 0 };
   }
 };
+
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/brand/static-ids`,
+    );
+    const data = await res.json();
+
+    const brands: { _id: string }[] = data?.data || [];
+
+    return brands.map((b) => ({
+      brandId: String(b._id),
+    }));
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+}
 
 export async function generateMetadata({
   params,

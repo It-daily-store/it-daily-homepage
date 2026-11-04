@@ -11,6 +11,7 @@ const fetchProducts = async () => {
         cache: 'force-cache',
         next: {
           revalidate: 300,
+          tags: ['products'],
         },
       },
     );
