@@ -9,7 +9,7 @@ const fetchData = async (url: string) => {
   try {
     const res = await fetch(url, {
       cache: 'force-cache',
-      next: { revalidate: 180 },
+      next: { revalidate: 180, tags: ['products'] },
     });
     const data = await res.json();
     return data;

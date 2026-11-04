@@ -16,7 +16,7 @@ const fetchData = async (slug: string) => {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/category/single/${slug}`,
       {
         cache: 'force-cache',
-        next: { revalidate: 180 },
+        next: { revalidate: 180, tags: ['products'] },
       },
     );
     const data = await res.json();

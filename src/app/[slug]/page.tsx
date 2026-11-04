@@ -7,6 +7,24 @@ import ProductSkeleton from '@/components/shared/Product/ProductSkeleton';
 import CategoryPageTopSection from '@/components/category/CategoryPageTopSection';
 import CategoryPageTopSkeleton from '@/components/category/CategoryPageTopSkeleton';
 
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/category/static-slugs`,
+    );
+    const data = await res.json();
+
+    const categories: { slug: string }[] = data?.data || [];
+
+    return categories.map((c) => ({
+      slug: String(c.slug),
+    }));
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+}
+
 const ProductByCategoryPage = async ({
   params,
   searchParams,
