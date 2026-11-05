@@ -9,7 +9,7 @@ const getActiveBannerTemplate = async (): Promise<BannerTemplate | null> => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/banner/active`,
-      { next: { revalidate: 0 } },
+      { cache: 'force-cache', next: { revalidate: 300, tags: ['banner'] } },
     );
 
     const body = await res.json();

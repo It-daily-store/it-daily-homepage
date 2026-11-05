@@ -8,7 +8,7 @@ const getData = async () => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/category/get-featured`,
-      { next: { revalidate: 120 } },
+      { next: { revalidate: 120, tags: ['products'] } },
     );
     const data = await res.json();
 
