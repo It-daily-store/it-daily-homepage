@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
+const ALLOWED_TAGS = ['products', 'banner'];
+
 const isAuthorized = (provided: string | null) => {
   const secret = process.env.REVALIDATE_SECRET;
 
@@ -17,13 +19,32 @@ const isAuthorized = (provided: string | null) => {
   return a.length === b.length && timingSafeEqual(a, b);
 };
 
-// Called by the backend after any product, brand, category, filter or stock change.
+const readTags = async (req: Request) => {
+  try {
+    const body = await req.json();
+    return Array.isArray(body?.tags) ? body.tags : null;
+  } catch {
+    // A body-less call comes from a backend deployed before tags existed.
+    return ['products'];
+  }
+};
+
+// Called by the backend after any catalog or banner change.
 export const POST = async (req: Request) => {
   if (!isAuthorized(req.headers.get('x-revalidate-secret'))) {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
-  revalidateTag('products');
+  const tags = await readTags(req);
 
-  return NextResponse.json({ ok: true });
+  if (
+    !tags?.length ||
+    !tags.every((tag: unknown) => ALLOWED_TAGS.includes(String(tag)))
+  ) {
+    return NextResponse.json({ ok: false }, { status: 400 });
+  }
+
+  tags.forEach((tag: string) => revalidateTag(tag));
+
+  return NextResponse.json({ ok: true, tags });
 };
