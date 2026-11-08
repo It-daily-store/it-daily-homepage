@@ -25,18 +25,18 @@ const FilterCard = ({ filter }: { filter: TPFilter }) => {
       <CollapsibleContent>
         <div className="mt-2 space-y-1">
           {filter?.options?.map((option) => (
-            <div
-              className="flex items-center justify-between"
+            <label
+              className="hover:text-primary flex cursor-pointer items-center justify-between gap-2"
               key={`${filter.filterId}-${option.optionId}`}
             >
-              <h5 className="text-sm">{option.value}</h5>
+              <span className="text-sm">{option.value}</span>
               <Checkbox
-                checked={selectedOptionIds.includes(option.optionId)}
+                checked={selectedOptionIds.includes(Number(option.optionId))}
                 onCheckedChange={(val) =>
-                  toggle(filter.filterId, option.optionId, Boolean(val))
+                  toggle(filter.filterId, Number(option.optionId), Boolean(val))
                 }
               />
-            </div>
+            </label>
           ))}
         </div>
       </CollapsibleContent>

@@ -17,7 +17,8 @@ export type TProductWarrenty = {
 };
 
 export type TPFilterOption = {
-  optionId: number;
+  // Older filters stored option ids as strings, so both shapes come back from the API.
+  optionId: number | string;
   value: string;
 };
 
