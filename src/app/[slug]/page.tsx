@@ -1,7 +1,10 @@
 import React, { Suspense } from 'react';
 import MobileFilter from '@/components/category/MobileFilter';
 import FiltersSidebar from '@/components/category/FiltersSidebar';
-import { FilterSkeleton } from '@/components/category/FilterSkeleton';
+import {
+  FilterSkeleton,
+  MobileFilterSkeleton,
+} from '@/components/category/FilterSkeleton';
 import CategoryProducts from '@/components/category/CategoryProducts';
 import ProductSkeleton from '@/components/shared/Product/ProductSkeleton';
 import CategoryPageTopSection from '@/components/category/CategoryPageTopSection';
@@ -53,7 +56,9 @@ const ProductByCategoryPage = async ({
             <FiltersSidebar slug={slug} />
           </Suspense>
           <div className="w-full">
-            <MobileFilter slug={slug} />
+            <Suspense fallback={<MobileFilterSkeleton />}>
+              <MobileFilter slug={slug} />
+            </Suspense>
             <Suspense
               fallback={
                 <div className="col-span-4 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 md:gap-4">

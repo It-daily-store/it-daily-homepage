@@ -41,3 +41,11 @@ export function FilterSkeleton({
     </div>
   );
 }
+
+export function MobileFilterSkeleton() {
+  return (
+    <div className="bg-background mb-3 flex w-full items-center gap-2 rounded-lg border px-3 py-2 shadow-xs">
+      <Skeleton className="bg-border h-6 w-32" />
+    </div>
+  );
+}
