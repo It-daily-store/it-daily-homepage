@@ -1,49 +1,18 @@
 'use client';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { TPFilter, TPFilterOption } from '@/types/product.interface';
+import { TPFilter } from '@/types/product.interface';
 import { Checkbox } from '../ui/checkbox';
-import React, { useCallback } from 'react';
-import { useRouter } from 'nextjs-toploader/app';
+import React from 'react';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { ChevronDown } from 'lucide-react';
+import { useFilterState } from './FilterStateProvider';
 
 const FilterCard = ({ filter }: { filter: TPFilter }) => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  // Use filter-specific key to avoid conflicts
-  const filterKey = `ff${filter.filterId}`;
-  const selectedOptionIds =
-    searchParams.get(filterKey)?.split(',').map(Number) || [];
-
-  const handleChange = useCallback(
-    (checked: boolean, option: TPFilterOption) => {
-      const params = new URLSearchParams(searchParams.toString());
-      const key = `ff${filter.filterId}`;
-
-      // Get current selections for THIS specific filter only
-      const current =
-        params.get(key)?.split(',').map(Number).filter(Boolean) || [];
-
-      const updated = checked
-        ? [...new Set([...current, option.optionId])] // Add option ID
-        : current.filter((id) => id !== option.optionId); // Remove option ID
-
-      if (updated.length) {
-        params.set(key, updated.join(','));
-      } else {
-        params.delete(key);
-      }
-
-      router.push(`${pathname}?${params.toString()}`);
-    },
-    [router, filter],
-  );
+  const { selected, toggle } = useFilterState();
+  const selectedOptionIds = selected(filter.filterId);
 
   return (
     <Collapsible defaultOpen className="group/collapsible">
@@ -56,17 +25,18 @@ const FilterCard = ({ filter }: { filter: TPFilter }) => {
       <CollapsibleContent>
         <div className="mt-2 space-y-1">
           {filter?.options?.map((option) => (
-            <div
-              className="flex items-center justify-between"
-              key={`${filter.filterId}-${option.optionId}`} // Make key unique across filters
+            <label
+              className="hover:text-primary flex cursor-pointer items-center justify-between gap-2"
+              key={`${filter.filterId}-${option.optionId}`}
             >
-              <h5 className="text-sm">{option.value}</h5>
+              <span className="text-sm">{option.value}</span>
               <Checkbox
-                checked={selectedOptionIds.includes(option.optionId)}
-                // onCheckedChange={(val) => router.push(`/Laptop?ff1=2`)}
-                onCheckedChange={(val) => handleChange(Boolean(val), option)}
+                checked={selectedOptionIds.includes(Number(option.optionId))}
+                onCheckedChange={(val) =>
+                  toggle(filter.filterId, Number(option.optionId), Boolean(val))
+                }
               />
-            </div>
+            </label>
           ))}
         </div>
       </CollapsibleContent>

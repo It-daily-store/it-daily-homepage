@@ -27,6 +27,11 @@ const Pagination = ({
   const currentUrl =
     pathname + (searchParams.toString() ? `?${searchParams}` : '');
 
+  // 10 is the smallest page size, so neither page links nor the limit picker can change anything.
+  if (totalItems <= 10) {
+    return null;
+  }
+
   return (
     <div className="flex items-center justify-between gap-3 py-4">
       {/* Left: Item Count */}
